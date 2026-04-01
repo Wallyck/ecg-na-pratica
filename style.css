@@ -160,11 +160,11 @@ img { display: block; max-width: 100%; }
    HEADER
    ============================================================ */
 .site-header {
-  position: fixed;
+  position: absolute;
   top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: var(--dark-red);
-  padding: 14px 0;
+  z-index: 10;
+  background: transparent;
+  padding: 20px 0;
 }
 
 .header-inner {
@@ -195,7 +195,6 @@ img { display: block; max-width: 100%; }
    ============================================================ */
 .hero {
   background: url('IMAGE _ DOBRA 1 _ DESKTOP.png') right center / cover no-repeat var(--dark-red);
-  padding-top: 72px; /* offset do header fixo */
   position: relative;
 }
 
@@ -206,9 +205,9 @@ img { display: block; max-width: 100%; }
   z-index: 1;
   display: flex;
   align-items: center;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  min-height: 440px;
+  padding-top: 120px; /* espaço para logo absoluta + respiro */
+  padding-bottom: 72px;
+  min-height: 520px;
 }
 
 .hero-content {
@@ -217,10 +216,10 @@ img { display: block; max-width: 100%; }
 
 /* Mobile */
 @media (max-width: 767px) {
+  .site-header { display: none; } /* logo está embutida na imagem mobile */
   .hero {
     background-image: none;
     background-color: var(--dark-red);
-    padding-top: 0; /* header sobrepõe o topo da imagem */
   }
   .hero-mobile-visual {
     display: block;
@@ -230,14 +229,13 @@ img { display: block; max-width: 100%; }
     display: block;
   }
   .hero-inner {
-    padding-top: 32px;
-    padding-bottom: 48px;
+    padding-top: 36px;
+    padding-bottom: 52px;
     min-height: auto;
   }
   .hero-content { max-width: 100%; }
 }
 
-/* ECG line (mantido para compatibilidade mas não usado com as novas imagens) */
 .ecg-line { display: none; }
 
 .hero-badge {
@@ -257,14 +255,18 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 800;
-  line-height: 1.12;
-  color: var(--cream);
+  font-size: clamp(1.9rem, 3.8vw, 3.17rem);
+  line-height: 1.51;
   margin-bottom: 24px;
 }
-.hero-title em {
-  font-style: normal;
+
+.hero-title-bold {
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.hero-title-light {
+  font-weight: 400;
   color: var(--white);
 }
 
