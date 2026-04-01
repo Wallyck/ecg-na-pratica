@@ -212,6 +212,8 @@ img { display: block; max-width: 100%; }
   max-width: 520px;
 }
 
+.hero-mobile-visual { display: none; } /* oculto em tablet+ */
+
 /* Tablet */
 @media (max-width: 1023px) {
   .hero {
@@ -224,13 +226,21 @@ img { display: block; max-width: 100%; }
 @media (max-width: 767px) {
   .site-header { display: block; }
   .hero {
-    background-image: url('IMAGE MOBILE.webp');
-    background-position: left center;
+    background-image: none;
+    background-color: var(--dark-red);
+  }
+  .hero-mobile-visual {
+    display: block;
+    padding-top: 76px; /* empurra a imagem abaixo do header absoluto */
+  }
+  .hero-mobile-visual img {
+    width: 100%;
+    display: block;
   }
   .hero-inner {
-    padding-top: 100px;
+    padding-top: 28px;
     padding-bottom: 52px;
-    min-height: 420px;
+    min-height: auto;
   }
   .hero-content { max-width: 100%; }
 }
