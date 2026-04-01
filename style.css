@@ -225,7 +225,7 @@ img { display: block; max-width: 100%; }
   .site-header { display: block; }
   .hero {
     background-image: url('IMAGE MOBILE.webp');
-    background-position: right center;
+    background-position: left center;
   }
   .hero-inner {
     padding-top: 100px;
