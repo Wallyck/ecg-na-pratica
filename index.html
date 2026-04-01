@@ -3,296 +3,1172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ECG na Prática — Domine o Traçado</title>
-  <meta name="description" content="Aprenda a interpretar ECG de forma prática e aplicada ao plantão. Curso para enfermeiros que querem segurança clínica real." />
-
+  <title>ECG na Prática — Aula ao vivo, 02 de maio</title>
+  <meta name="description" content="Aprenda a interpretar qualquer ECG em um único dia de aula. Aula ao vivo para enfermeiros. Sábado, 02 de maio, 8h às 18h." />
   <meta name="theme-color" content="#470600" />
 
-  <!-- Fonte não-bloqueante -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Public+Sans:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    button, a { font-family: inherit; }
+
+    /* ── Tokens ─────────────────────────────────────────── */
+    :root {
+      --wine:    #470600;
+      --crimson: #7E0001;
+      --cream:   #F6E3CE;
+      --green:   #0AA988;
+      --white:   #FFFFFF;
+      --red-dot: #FF6B6B;
+      --off:     #FAFAF8;
+    }
+
+    /* ── Base ───────────────────────────────────────────── */
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      line-height: 1.65;
+      color: var(--wine);
+      background: var(--off);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* ════════════════════════════════════════════════════
+       HERO — 1ª dobra
+    ════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background:
+        linear-gradient(to right, #470600 0%, #470600 28%, transparent 55%),
+        url('IMAGE _ DOBRA 1 _ DESKTOP.png') right center / cover no-repeat;
+      background-color: #470600;
+      overflow: hidden;
+      border-bottom: 1px solid var(--cream);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Luzes difusas decorativas */
+    .hero-lights {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-light {
+      position: absolute;
+      border-radius: 50%;
+      mix-blend-mode: plus-lighter;
+      opacity: 0.69;
+      filter: blur(90px);
+    }
+    .hero-light-1 {
+      width: 680px; height: 520px;
+      background: radial-gradient(ellipse at center, rgba(180,30,10,0.75) 0%, transparent 70%);
+      right: -80px; top: -80px;
+      transform: rotate(-25deg);
+    }
+    .hero-light-2 {
+      width: 500px; height: 700px;
+      background: radial-gradient(ellipse at center, rgba(200,50,10,0.55) 0%, transparent 70%);
+      right: 250px; bottom: -180px;
+      transform: rotate(18deg);
+    }
+    .hero-light-3 {
+      width: 420px; height: 580px;
+      background: radial-gradient(ellipse at center, rgba(160,20,0,0.45) 0%, transparent 70%);
+      right: 80px; top: 40%;
+      transform: translateY(-50%) rotate(-12deg);
+    }
+
+    /* Linha ECG decorativa */
+    .hero-ecg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+    .hero-ecg svg { width: 100%; }
+
+    /* Mobile image — oculto no desktop */
+    .hero-mobile-img { display: none; }
+
+    /* Conteúdo */
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .hero-content {
+      max-width: 560px;
+      padding: 120px 0 80px;
+    }
+
+    .hero-logo {
+      height: 64px;
+      width: auto;
+      margin-bottom: 48px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(246,227,206,0.12);
+      border: 1px solid rgba(246,227,206,0.25);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 32px;
+    }
+    .hero-tag-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red-dot);
+      flex-shrink: 0;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(.8); }
+    }
+
+    .hero-headline {
+      font-size: 50px;
+      line-height: 76px;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .hero-headline-cream {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .hero-headline-white {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(246,227,206,0.8);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 70px;
+      padding: 0 32px;
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 59px;
+      border: 3px solid rgba(255,255,255,0.33);
+      transition: transform 0.15s, opacity 0.15s;
+      white-space: nowrap;
+    }
+    .hero-btn:hover { transform: scale(1.02); opacity: 0.92; }
+
+    .hero-price {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(246,227,206,0.65);
+    }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 2 — Problema
+    ════════════════════════════════════════════════════ */
+    .s-pain {
+      padding: 80px 5%;
+      background: var(--off);
+    }
+    .s-pain .container { max-width: 780px; }
+
+    .s-pain h2 {
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--wine);
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .pain-text {
+      font-size: 20px;
+      color: rgba(71,6,0,0.78);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .pain-text--lead {
+      font-weight: 600;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      color: var(--wine);
+    }
+
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .pain-item {
+      padding: 18px 20px 18px 24px;
+      background: var(--white);
+      border-left: 4px solid var(--crimson);
+      border-radius: 0 12px 12px 0;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--wine);
+      box-shadow: 0 1px 8px rgba(71,6,0,0.06);
+    }
+
+    .pain-close {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--wine);
+      padding: 24px 28px;
+      background: rgba(126,0,1,0.07);
+      border-radius: 12px;
+      border-left: 4px solid var(--crimson);
+    }
+    .pain-close strong { font-weight: 700; }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 3 — Evento/Solução
+    ════════════════════════════════════════════════════ */
+    .s-event {
+      padding: 80px 5%;
+      background: var(--wine);
+    }
+
+    .s-event h2 {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--cream);
+      margin-bottom: 20px;
+      max-width: 720px;
+    }
+    .s-event h2 em {
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    .event-sub {
+      font-size: 20px;
+      color: rgba(246,227,206,0.75);
+      margin-bottom: 48px;
+      max-width: 620px;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 860px;
+    }
+    .event-card {
+      padding: 24px 20px;
+      background: rgba(246,227,206,0.08);
+      border: 1px solid rgba(246,227,206,0.15);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event-icon { font-size: 26px; }
+    .event-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 4 — O que vai dominar
+    ════════════════════════════════════════════════════ */
+    .s-learn {
+      padding: 80px 5%;
+      background: var(--white);
+    }
+
+    .s-learn h2 {
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--wine);
+      margin-bottom: 40px;
+      line-height: 1.3;
+    }
+    .s-learn h2 strong { font-weight: 600; }
+
+    .learn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+      max-width: 820px;
+    }
+    .learn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--off);
+      border-radius: 12px;
+      border: 1px solid rgba(71,6,0,0.07);
+    }
+    .learn-check {
+      width: 30px; height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .learn-item span {
+      font-size: 18px;
+      color: var(--wine);
+      line-height: 1.55;
+    }
+
+    .learn-close {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--wine);
+      padding: 24px 28px;
+      background: rgba(10,169,136,0.07);
+      border-left: 4px solid var(--green);
+      border-radius: 0 12px 12px 0;
+      max-width: 420px;
+    }
+    .learn-close strong { font-weight: 700; }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 5 — Autoridade
+    ════════════════════════════════════════════════════ */
+    .s-auth {
+      padding: 80px 5%;
+      background: var(--cream);
+    }
+
+    .auth-inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .auth-photo {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+    }
+    .auth-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 62% top;
+    }
+
+    .auth-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--crimson);
+      margin-bottom: 10px;
+    }
+    .auth-name {
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--wine);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .auth-bio {
+      font-size: 17px;
+      color: rgba(71,6,0,0.72);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .auth-stats {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .auth-stat {
+      padding: 16px 22px;
+      background: var(--wine);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .auth-stat strong {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .auth-stat span {
+      font-size: 13px;
+      color: rgba(246,227,206,0.6);
+    }
+
+    .auth-quote {
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--wine);
+      padding: 20px 24px;
+      border-left: 4px solid var(--crimson);
+      background: rgba(71,6,0,0.06);
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 6 — Para quem é
+    ════════════════════════════════════════════════════ */
+    .s-who {
+      padding: 80px 5%;
+      background: var(--off);
+    }
+
+    .s-who h2 {
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--wine);
+      margin-bottom: 36px;
+      line-height: 1.3;
+    }
+    .s-who h2 strong { font-weight: 600; }
+
+    .who-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+    .who-list li {
+      padding: 16px 20px;
+      background: var(--white);
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--wine);
+      border: 1px solid rgba(71,6,0,0.08);
+      box-shadow: 0 1px 6px rgba(71,6,0,0.05);
+    }
+
+    .who-rule {
+      width: 48px; height: 3px;
+      background: rgba(71,6,0,0.18);
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .who-not {
+      font-size: 16px;
+      color: rgba(71,6,0,0.5);
+      font-style: italic;
+      max-width: 600px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 7 — Oferta / Lotes
+    ════════════════════════════════════════════════════ */
+    .s-offer {
+      padding: 80px 5%;
+      background: var(--wine);
+    }
+
+    .s-offer h2 {
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 48px;
+      line-height: 1.3;
+      max-width: 680px;
+    }
+    .s-offer h2 strong { font-weight: 600; }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 960px;
+    }
+
+    .offer-card {
+      padding: 32px 28px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border: 2px solid transparent;
+    }
+    .offer-card--on {
+      background: rgba(246,227,206,0.07);
+      border-color: var(--green);
+      box-shadow: 0 0 36px rgba(10,169,136,0.18);
+    }
+    .offer-card--off {
+      background: rgba(246,227,206,0.03);
+      border-color: rgba(246,227,206,0.1);
+      opacity: 0.6;
+    }
+
+    .offer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      width: fit-content;
+    }
+    .offer-badge--on {
+      background: rgba(10,169,136,0.15);
+      color: #0AA988;
+      border: 1px solid rgba(10,169,136,0.3);
+    }
+    .offer-badge--off {
+      background: rgba(246,227,206,0.07);
+      color: rgba(246,227,206,0.45);
+      border: 1px solid rgba(246,227,206,0.14);
+    }
+
+    .offer-lote {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(246,227,206,0.6);
+    }
+    .offer-card--on .offer-lote { color: var(--green); }
+
+    .offer-desc {
+      font-size: 14px;
+      color: rgba(246,227,206,0.55);
+      line-height: 1.45;
+    }
+    .offer-card--on .offer-desc { color: rgba(246,227,206,0.75); }
+
+    .offer-price {
+      font-size: 14px;
+      color: rgba(246,227,206,0.45);
+    }
+    .offer-price strong {
+      font-size: 44px;
+      font-weight: 600;
+      display: block;
+      line-height: 1.1;
+      color: var(--cream);
+    }
+
+    .offer-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 20px;
+      border-radius: 59px;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+      line-height: 1.3;
+    }
+    .offer-btn--on {
+      background: var(--green);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .offer-btn--on:hover { transform: scale(1.02); opacity: 0.92; }
+    .offer-btn--disabled {
+      background: rgba(246,227,206,0.05);
+      color: rgba(246,227,206,0.28);
+      border-color: rgba(246,227,206,0.1);
+      cursor: not-allowed;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SEÇÃO 8 — Urgência final
+    ════════════════════════════════════════════════════ */
+    .s-urgency {
+      padding: 100px 5%;
+      background: #150000;
+      text-align: center;
+    }
+
+    .s-urgency h2 {
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .s-urgency h2 strong { font-weight: 600; }
+
+    .urgency-sub {
+      font-size: 18px;
+      color: rgba(246,227,206,0.62);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+    }
+
+    .urgency-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 70px;
+      padding: 0 52px;
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 59px;
+      border: 3px solid rgba(255,255,255,0.25);
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .urgency-btn:hover { transform: scale(1.02); opacity: 0.92; }
+
+    /* ════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════ */
+    .footer {
+      padding: 32px 5%;
+      background: var(--wine);
+      text-align: center;
+    }
+    .footer p {
+      font-size: 14px;
+      color: rgba(246,227,206,0.5);
+    }
+
+    /* ════════════════════════════════════════════════════
+       STICKY BAR
+    ════════════════════════════════════════════════════ */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: linear-gradient(90deg, #470600 0%, #7E0001 100%);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .sticky-bar.visible {
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .sticky-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-top: 2px solid rgba(246,227,206,0.18);
+    }
+    .sticky-badge {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .sticky-price {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--cream);
+      white-space: nowrap;
+    }
+    .sticky-price strong { font-weight: 600; }
+    .sticky-spacer { flex: 1; }
+    .sticky-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 28px;
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 59px;
+      border: 2px solid rgba(255,255,255,0.25);
+      white-space: nowrap;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .sticky-btn:hover { transform: scale(1.02); opacity: 0.92; }
+    .sticky-close {
+      background: none;
+      border: none;
+      color: rgba(246,227,206,0.4);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 6px 8px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .sticky-close:hover { color: var(--cream); }
+
+    /* ════════════════════════════════════════════════════
+       RESPONSIVO — max 768px
+    ════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      body { font-size: 18px; }
+
+      /* Hero mobile */
+      .hero {
+        display: block;
+        min-height: auto;
+        background: var(--wine);
+      }
+      .hero-lights,
+      .hero-ecg { display: none; }
+
+      .hero-mobile-img {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+      .hero-mobile-img > img:first-child {
+        width: 100%;
+        display: block;
+      }
+      .hero-mobile-logo {
+        position: absolute;
+        top: 16px; left: 20px;
+        height: 44px;
+        width: auto;
+        z-index: 2;
+      }
+
+      .hero-inner { padding: 0; }
+      .hero-content {
+        padding: 32px 24px 52px;
+        max-width: 100%;
+        text-align: center;
+      }
+      .hero-logo { display: none; }
+      .hero-tag { margin: 0 auto 28px; }
+      .hero-headline {
+        font-size: 36px;
+        line-height: 52px;
+      }
+      .hero-subtitle {
+        font-size: 18px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .hero-btn { width: 100%; max-width: 400px; }
+
+      /* Sections */
+      .s-pain, .s-event, .s-learn,
+      .s-auth, .s-who, .s-offer,
+      .s-urgency { padding: 60px 24px; }
+
+      .s-pain h2    { font-size: 26px; }
+      .s-event h2   { font-size: 26px; }
+      .s-learn h2   { font-size: 26px; }
+      .s-who h2     { font-size: 26px; }
+      .s-offer h2   { font-size: 26px; }
+      .s-urgency h2 { font-size: 32px; }
+
+      .event-grid { grid-template-columns: 1fr 1fr; }
+
+      .auth-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .auth-photo {
+        aspect-ratio: 16 / 9;
+        max-height: 260px;
+      }
+      .auth-name { font-size: 30px; }
+
+      .offer-grid { grid-template-columns: 1fr; }
+
+      .urgency-btn { width: 100%; padding: 0 24px; font-size: 14px; }
+
+      /* Sticky mobile */
+      .sticky-bar-inner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 16px 20px;
+      }
+      .sticky-spacer { display: none; }
+      .sticky-btn { width: 100%; max-width: 360px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===================== HEADER ===================== -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <svg class="logo-img" width="184" height="153" viewBox="0 0 184 153" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ECG na Prática"><path d="M18.8276 128.915V152H16.1223L3.54287 133.875H3.31743V152H0.521996V128.915H3.22725L15.8518 147.085H16.0772V128.915H18.8276Z" fill="white"/><path d="M25.3681 152H22.4374L30.9139 128.915H33.7995L42.276 152H39.3453L32.4469 132.567H32.2665L25.3681 152ZM26.4502 142.982H38.2632V145.462H26.4502V142.982Z" fill="white"/><path d="M54.7991 152V128.915H62.5992C64.4102 128.915 65.8906 129.242 67.0404 129.896C68.1976 130.542 69.0543 131.417 69.6104 132.522C70.1664 133.627 70.4445 134.859 70.4445 136.219C70.4445 137.579 70.1664 138.816 69.6104 139.928C69.0618 141.04 68.2126 141.927 67.0629 142.588C65.9132 143.242 64.4403 143.569 62.6443 143.569H57.0534V141.089H62.5541C63.794 141.089 64.7897 140.875 65.5412 140.446C66.2927 140.018 66.8375 139.439 67.1756 138.71C67.5213 137.974 67.6941 137.144 67.6941 136.219C67.6941 135.295 67.5213 134.468 67.1756 133.74C66.8375 133.011 66.2889 132.439 65.5299 132.026C64.7709 131.605 63.764 131.395 62.509 131.395H57.5945V152H54.7991Z" fill="white"/><path d="M74.9476 152V128.915H82.7478C84.5513 128.915 86.0316 129.223 87.1889 129.839C88.3461 130.448 89.2028 131.286 89.7589 132.353C90.315 133.42 90.593 134.634 90.593 135.994C90.593 137.354 90.315 138.56 89.7589 139.612C89.2028 140.664 88.3499 141.491 87.2002 142.092C86.0504 142.686 84.5813 142.982 82.7929 142.982H76.4806V140.458H82.7027C83.9351 140.458 84.927 140.277 85.6785 139.917C86.4374 139.556 86.986 139.045 87.3242 138.384C87.6698 137.715 87.8427 136.918 87.8427 135.994C87.8427 135.07 87.6698 134.262 87.3242 133.57C86.9785 132.879 86.4262 132.346 85.6672 131.97C84.9082 131.587 83.905 131.395 82.6576 131.395H77.743V152H74.9476ZM85.8137 141.63L91.4948 152H88.2485L82.6576 141.63H85.8137Z" fill="white"/><path d="M96.198 152H93.2673L101.744 128.915H104.629L113.106 152H110.175L103.277 132.567H103.096L96.198 152ZM97.2801 142.982H109.093V145.462H97.2801V142.982ZM101.969 126.571L104.72 121.34H107.831L104.314 126.571H101.969Z" fill="white"/><path d="M112.742 131.395V128.915H130.056V131.395H122.797V152H120.001V131.395H112.742Z" fill="white"/><path d="M137.166 128.915V152H134.37V128.915H137.166Z" fill="white"/><path d="M161.347 136.129H158.551C158.386 135.325 158.097 134.619 157.683 134.01C157.278 133.401 156.782 132.89 156.196 132.477C155.617 132.056 154.974 131.741 154.268 131.53C153.562 131.32 152.825 131.215 152.059 131.215C150.661 131.215 149.395 131.568 148.26 132.274C147.133 132.981 146.235 134.021 145.566 135.396C144.905 136.772 144.574 138.459 144.574 140.458C144.574 142.456 144.905 144.143 145.566 145.519C146.235 146.894 147.133 147.935 148.26 148.641C149.395 149.347 150.661 149.701 152.059 149.701C152.825 149.701 153.562 149.595 154.268 149.385C154.974 149.175 155.617 148.863 156.196 148.449C156.782 148.029 157.278 147.514 157.683 146.905C158.097 146.289 158.386 145.583 158.551 144.786H161.347C161.136 145.966 160.753 147.022 160.197 147.953C159.641 148.885 158.95 149.678 158.123 150.332C157.296 150.978 156.368 151.47 155.339 151.808C154.317 152.147 153.224 152.316 152.059 152.316C150.09 152.316 148.339 151.835 146.806 150.873C145.273 149.911 144.067 148.543 143.188 146.77C142.309 144.996 141.869 142.892 141.869 140.458C141.869 138.023 142.309 135.919 143.188 134.145C144.067 132.372 145.273 131.004 146.806 130.042C148.339 129.08 150.09 128.6 152.059 128.6C153.224 128.6 154.317 128.769 155.339 129.107C156.368 129.445 157.296 129.941 158.123 130.595C158.95 131.241 159.641 132.03 160.197 132.962C160.753 133.886 161.136 134.942 161.347 136.129Z" fill="white"/><path d="M166.811 152H163.88L172.357 128.915H175.242L183.719 152H180.788L173.89 132.567H173.709L166.811 152ZM167.893 142.982H179.706V145.462H167.893V142.982Z" fill="white"/><path d="M72.5342 114.786L78.8086 115.083L81.3965 97.5537C82.3674 98.6891 83.678 99.2578 85.3301 99.2578C87.3584 99.2577 88.7785 98.4236 89.5898 96.7559C90.4462 95.0881 90.874 92.924 90.874 90.2646V80.4688L91.7451 79.2266C91.8664 79.0538 92.1201 79.0475 92.25 79.2139L98.6455 87.4268C100.065 89.25 102.334 90.2019 104.63 89.9385L113.688 88.8984L114.81 89.0215V91.3467C114.81 101.804 112.172 109.4 106.898 114.133C101.625 118.821 94.2549 121.165 84.7891 121.165C76.1797 121.165 69.2378 118.483 63.9639 113.119C58.7351 107.755 56.1202 100.25 56.1201 90.6035V90.1807H58.8984C58.9626 90.1807 59.0264 90.2006 59.0791 90.2373L67.126 95.8379L69.6201 59L72.5342 114.786Z" fill="white"/><path d="M180.531 120.083H170.997L166.94 110.076C162.793 117.469 156.257 121.165 147.332 121.165C131.585 121.165 123.135 110.714 121.979 89.8135L125.124 90.1611L125.296 90.1807H145.414C145.538 92.6013 145.93 94.6357 146.589 96.2832C147.445 98.2662 149.091 99.2578 151.524 99.2578C154.048 99.2578 155.716 98.2662 156.527 96.2832C157.384 94.2549 157.812 91.5951 157.812 88.3047V71.333H151.457V50.7783H180.531V120.083Z" fill="white"/><path d="M24.2061 96.8916H49.1562V120.083H0V88.8789H24.2061V96.8916Z" fill="white"/><path d="M85.3301 0C90.9644 3.19211e-05 95.9676 1.03695 100.34 3.11035C104.757 5.18386 108.229 8.29439 110.753 12.4414C113.277 16.5433 114.539 21.7268 114.539 27.9922V48.5469H90.874V30.9668C90.874 27.406 90.423 25.0168 89.5215 23.7998C88.62 22.538 87.2229 21.9073 85.3301 21.9072C83.1214 21.9072 81.6335 22.7182 80.8672 24.3408C80.1009 25.9185 79.7178 28.0378 79.7178 30.6973V85.1426C78.8076 85.5043 78.0069 86.0923 77.3955 86.8467L73.1797 6.13184L66.8799 6.08301L61.5713 84.4326C60.7336 84.0636 59.8231 83.8711 58.8984 83.8711H56.1201V35.7002C56.1201 24.1607 58.3965 15.3257 62.9492 9.19531C67.547 3.06494 75.0076 0 85.3301 0Z" fill="white"/><path d="M151.051 0C159.074 0 165.228 1.62267 169.51 4.86816C173.792 8.06853 176.744 12.7563 178.367 18.9316C179.99 25.107 180.802 32.6348 180.802 41.5146H157.542V30.9668C157.542 28.3977 157.181 26.2567 156.46 24.5439C155.784 22.786 154.342 21.9072 152.133 21.9072C149.383 21.9072 147.558 22.8309 146.656 24.6787C145.8 26.5268 145.371 28.5559 145.371 30.7646V83.8711H125.649L121.842 83.4502V33.334C121.842 11.1115 131.578 7.80496e-05 151.051 0Z" fill="white"/><path d="M114.81 82.6738L113.676 82.5488L103.91 83.6699C103.801 83.6823 103.693 83.6369 103.626 83.5508L97.2305 75.3379C95.6412 73.2971 93.1691 72.4883 90.874 72.8809V68.8311H114.81V82.6738Z" fill="white"/><path d="M47.6006 24.0703H24.2061V47.2627H46.6543V69.6426H24.2061V82.5684H0V1.08203H47.6006V24.0703Z" fill="white"/></svg>
-    </div>
-  </header>
-
-  <!-- ===================== HERO ===================== -->
+  <!-- ════════ SEÇÃO 1 — HERO ════════ -->
   <section class="hero" aria-label="Apresentação do curso">
 
-    <!-- Imagem mobile da primeira dobra -->
-    <div class="hero-mobile-visual" aria-hidden="true">
+    <!-- Imagem mobile (visível só em mobile) -->
+    <div class="hero-mobile-img" aria-hidden="true">
       <img src="IMAGE MOBILE.webp" alt="" />
+      <img src="Logo.svg" class="hero-mobile-logo" alt="ECG na Prática" />
     </div>
 
-    <div class="container hero-inner">
+    <!-- Luzes difusas (desktop) -->
+    <div class="hero-lights" aria-hidden="true">
+      <div class="hero-light hero-light-1"></div>
+      <div class="hero-light hero-light-2"></div>
+      <div class="hero-light hero-light-3"></div>
+    </div>
+
+    <!-- Linha ECG decorativa (desktop) -->
+    <div class="hero-ecg" aria-hidden="true">
+      <svg viewBox="0 0 1920 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline
+          points="0,60 180,60 220,60 240,14 262,106 282,8 302,112 322,60 380,60 560,60 600,60 622,16 644,104 664,9 684,111 704,60 760,60 940,60 980,60 1002,14 1024,106 1044,8 1064,112 1084,60 1140,60 1320,60 1360,60 1382,16 1404,104 1424,9 1444,111 1464,60 1520,60 1700,60 1740,60 1762,15 1784,105 1804,8 1824,113 1844,60 1920,60"
+          stroke="#F6E3CE" stroke-width="2" stroke-opacity="0.2"
+          stroke-linejoin="round" stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <!-- Conteúdo de texto -->
+    <div class="hero-inner container">
       <div class="hero-content">
-        <div class="hero-badge fade-up">
-          <span class="badge-dot"></span>
-          Aula ao vivo | Sábado, 02 de maio | 8h às 18h
+        <img src="Logo.svg" class="hero-logo" alt="ECG na Prática" />
+
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          AULA AO VIVO | SÁBADO, 02 DE MAIO | 8H ÀS 18H
         </div>
 
-        <h1 class="hero-title fade-up">
-          <span class="hero-title-bold">Aprenda a interpretar qualquer ECG</span><span class="hero-title-light"> em um único dia de aula</span>
+        <h1 class="hero-headline">
+          <span class="hero-headline-cream">Aprenda a interpretar qualquer ECG</span><span class="hero-headline-white"> em um único dia de aula</span>
         </h1>
 
-        <p class="hero-subtitle fade-up">
+        <p class="hero-subtitle">
           Em um dia de aula você vai saber interpretar qualquer traçado com segurança — e nunca mais depender de ninguém no plantão
         </p>
 
-        <div class="hero-ctas fade-up">
-          <a href="#garantir"
-             class="btn btn-teal btn-large"
-             data-cta="hero-primary"
-             data-event="cta_click">
-            QUERO GARANTIR MINHA VAGA
-          </a>
+        <div class="hero-cta-row">
+          <a href="#garantir" class="hero-btn" data-cta="hero">QUERO GARANTIR MINHA VAGA</a>
           <span class="hero-price">1º Lote por R$ 29,99</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== DOR ===================== -->
-  <section class="section-pain" aria-label="Identificação do problema">
+  <!-- ════════ SEÇÃO 2 — PROBLEMA ════════ -->
+  <section class="s-pain" aria-label="Identificação do problema">
     <div class="container">
-      <h2 class="fade-up">
-        Se você é enfermeiro e ainda trava diante do ECG, <em>isso não é culpa sua.</em>
-      </h2>
-      <div class="divider fade-up"></div>
-      <p class="fade-up pain-text">
-        A graduação passou rápido por isso. Os plantões não param pra te ensinar. E ficar vendo vídeo solto no YouTube não fecha o raciocínio clínico.
-      </p>
-      <p class="fade-up pain-text">O resultado é sempre o mesmo:</p>
-      <div class="pain-list fade-up">
+      <h2><em>Se você é enfermeiro e ainda trava diante do ECG, isso não é culpa sua.</em></h2>
+      <p class="pain-text">A graduação passou rápido por isso. Os plantões não param pra te ensinar. E ficar vendo vídeo solto no YouTube não fecha o raciocínio clínico.</p>
+      <p class="pain-text pain-text--lead">O resultado é sempre o mesmo:</p>
+      <div class="pain-list">
         <div class="pain-item">O monitor apita e você espera alguém dizer o que é</div>
         <div class="pain-item">Você correlaciona o traçado com o quadro clínico... devagar demais</div>
         <div class="pain-item">Em situações críticas, o tempo que você leva pra interpretar pode custar caro</div>
         <div class="pain-item">Você se posiciona menos do que deveria — porque não tem certeza</div>
       </div>
-      <div class="pain-question fade-up">
-        Isso não é falta de esforço. É falta de método.
+      <div class="pain-close">Isso não é falta de esforço. <strong>É falta de método.</strong></div>
+    </div>
+  </section>
+
+  <!-- ════════ SEÇÃO 3 — SOLUÇÃO/EVENTO ════════ -->
+  <section class="s-event" aria-label="Sobre o evento">
+    <div class="container">
+      <h2>ECG na Prática é uma aula ao vivo, <em>do zero ao avançado,</em> em um único dia.</h2>
+      <p class="event-sub">10 horas de imersão completa, com raciocínio clínico aplicado à realidade do enfermeiro no plantão.</p>
+      <div class="event-grid">
+        <div class="event-card">
+          <div class="event-icon">📅</div>
+          <div class="event-label">Sábado, 02 de maio</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">⏰</div>
+          <div class="event-label">Das 8h às 18h</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">💻</div>
+          <div class="event-label">Online e ao vivo</div>
+        </div>
+        <div class="event-card">
+          <div class="event-icon">📄</div>
+          <div class="event-label">Com certificado</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== EVENTO ===================== -->
-  <section class="section-event" aria-label="Sobre o evento">
+  <!-- ════════ SEÇÃO 4 — CONTEÚDO ════════ -->
+  <section class="s-learn" id="aprender" aria-label="Conteúdo do curso">
     <div class="container">
-      <h2 class="fade-up">
-        ECG na Prática é uma aula ao vivo, <em>do zero ao avançado,</em> em um único dia.
-      </h2>
-      <p class="fade-up event-desc">
-        10 horas de imersão completa, com raciocínio clínico aplicado à realidade do enfermeiro no plantão.
-      </p>
-      <div class="event-details fade-up">
-        <div class="event-detail"><span>📅</span><span>Sábado, 02 de maio</span></div>
-        <div class="event-detail"><span>⏰</span><span>Das 8h às 18h</span></div>
-        <div class="event-detail"><span>💻</span><span>Online e ao vivo</span></div>
-        <div class="event-detail"><span>📄</span><span>Com certificado</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== CONTEÚDO ===================== -->
-  <section class="section-learn" id="aprender" aria-label="Conteúdo do curso">
-    <div class="container">
-      <h2 class="fade-up">
-        O que você vai <em>dominar</em> nesse dia:
-      </h2>
-      <div class="learn-grid">
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+      <h2>O que você vai <strong>dominar</strong> nesse dia:</h2>
+      <div class="learn-list">
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Leitura sistemática do ECG — um método que você aplica em qualquer traçado, sem se perder</span>
         </div>
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Análise do ritmo — identificar com segurança o que está acontecendo no coração do paciente</span>
         </div>
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Reconhecimento das principais arritmias — as que você vai encontrar na UTI, emergência e clínica</span>
         </div>
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Alterações críticas — o que exige ação imediata e como você age nisso</span>
         </div>
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Raciocínio clínico integrado — correlacionar o ECG com o quadro do paciente de forma prática</span>
         </div>
-        <div class="learn-item fade-up">
-          <div class="learn-check" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+        <div class="learn-item">
+          <div class="learn-check">✓</div>
           <span>Condutas de enfermagem — o que fazer com o que você interpretou</span>
         </div>
       </div>
-      <div class="learn-goal fade-up">
-        <p>No final do dia, você lê um ECG. <strong>Ponto.</strong></p>
+      <div class="learn-close">No final do dia, você lê um ECG. <strong>Ponto.</strong></div>
+    </div>
+  </section>
+
+  <!-- ════════ SEÇÃO 5 — AUTORIDADE ════════ -->
+  <section class="s-auth" aria-label="Sobre o professor">
+    <div class="container">
+      <div class="auth-inner">
+        <div class="auth-photo">
+          <img src="IMAGE _ DOBRA 1 _ DESKTOP.png" alt="Prof. Raphael Marinho" />
+        </div>
+        <div class="auth-text">
+          <p class="auth-label">Quem vai te ensinar isso</p>
+          <h2 class="auth-name">Prof. Raphael Marinho</h2>
+          <p class="auth-bio">Enfermeiro. Mestre em Ciências da Saúde pela UFMA. Titulado em Terapia Intensiva (ABENTI/AMIB) e em Urgência e Emergência (COBEEN/ABRAMEDE). Especialista em Cardiologia Intensiva. Professor de ECG e Sistema Cardiovascular em Pós-Graduações. Atuou como Enfermeiro Intensivista em UTIs de alta complexidade.</p>
+          <div class="auth-stats">
+            <div class="auth-stat">
+              <strong>+470.000</strong>
+              <span>seguidores</span>
+            </div>
+            <div class="auth-stat">
+              <strong>+42.000</strong>
+              <span>alunos formados</span>
+            </div>
+            <div class="auth-stat">
+              <strong>17</strong>
+              <span>países</span>
+            </div>
+          </div>
+          <div class="auth-quote"><em>Raphael não ensina teoria. Ele ensina o que funciona no plantão.</em></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== AUTORIDADE ===================== -->
-  <section class="section-authority" aria-label="Sobre o professor">
+  <!-- ════════ SEÇÃO 6 — PARA QUEM É ════════ -->
+  <section class="s-who" aria-label="Público do curso">
     <div class="container">
-      <span class="section-label fade-up">Quem vai te ensinar isso</span>
-      <h2 class="fade-up">Prof. Raphael Marinho</h2>
-      <div class="divider fade-up"></div>
-      <p class="fade-up authority-bio">
-        Enfermeiro. Mestre em Ciências da Saúde pela UFMA. Titulado em Terapia Intensiva (ABENTI/AMIB) e em Urgência e Emergência (COBEEN/ABRAMEDE). Especialista em Cardiologia Intensiva. Professor de ECG e Sistema Cardiovascular em Pós-Graduações. Atuou como Enfermeiro Intensivista em UTIs de alta complexidade.
-      </p>
-      <div class="authority-stats fade-up">
-        <div class="authority-stat">
-          <strong>+470.000</strong>
-          <span>seguidores</span>
-        </div>
-        <div class="authority-stat">
-          <strong>+42.000</strong>
-          <span>alunos formados</span>
-        </div>
-        <div class="authority-stat">
-          <strong>17</strong>
-          <span>países</span>
-        </div>
-      </div>
-      <div class="authority-callout fade-up">
-        Raphael não ensina teoria. Ele ensina o que funciona no plantão.
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PARA QUEM É ===================== -->
-  <section class="section-who" aria-label="Público do curso">
-    <div class="container">
-      <h2 class="fade-up">Essa aula é <em>pra você</em> se:</h2>
-      <ul class="who-list fade-up">
+      <h2>Essa aula é <strong>pra você</strong> se:</h2>
+      <ul class="who-list">
         <li>✅ É enfermeiro e ainda trava diante do ECG</li>
         <li>✅ Quer ter segurança para interpretar traçados no plantão</li>
         <li>✅ Trabalha ou quer trabalhar em UTI, emergência ou cardiologia</li>
         <li>✅ Quer tomar decisões com autonomia, sem depender de médico ou colega</li>
         <li>✅ É acadêmico de enfermagem e quer sair na frente</li>
       </ul>
-      <p class="fade-up who-not">
-        Não é pra você se só quer mais um certificado pra colocar no currículo sem aplicar na prática.
-      </p>
+      <div class="who-rule"></div>
+      <p class="who-not">Não é pra você se só quer mais um certificado pra colocar no currículo sem aplicar na prática.</p>
     </div>
   </section>
 
-  <!-- ===================== PREÇOS ===================== -->
-  <section class="section-pricing" id="garantir" aria-label="Opções de compra">
+  <!-- ════════ SEÇÃO 7 — OFERTA ════════ -->
+  <section class="s-offer" id="garantir" aria-label="Opções de compra">
     <div class="container">
-      <h2 class="fade-up">Garanta sua vaga agora. O preço sobe <em>conforme os lotes fecham.</em></h2>
+      <h2>Garanta sua vaga agora. O preço sobe <strong>conforme os lotes fecham.</strong></h2>
+      <div class="offer-grid">
 
-      <div class="pricing-grid">
-        <!-- Lote 1 -->
-        <div class="pricing-card pricing-card--featured fade-up">
-          <div class="pricing-badge">🔥 Disponível agora</div>
-          <div class="lote-tag">1º LOTE</div>
-          <div class="lote-price">
-            <span class="price-label">Menor valor disponível</span>
-            <span class="price-value">R$ <strong>29,99</strong></span>
-          </div>
-          <a href="#" class="btn btn-secondary" data-cta="lote1" data-event="purchase_click" data-lote="1" data-value="29.99">
+        <!-- Lote 1 — ativo -->
+        <div class="offer-card offer-card--on">
+          <div class="offer-badge offer-badge--on">🔥 Disponível agora</div>
+          <div class="offer-lote">1º LOTE</div>
+          <div class="offer-desc">Menor valor disponível</div>
+          <div class="offer-price">R$ <strong>29,99</strong></div>
+          <a href="#" class="offer-btn offer-btn--on" data-cta="lote1" data-lote="1" data-value="29.99">
             QUERO GARANTIR PELO MENOR PREÇO
           </a>
         </div>
 
-        <!-- Lote 2 -->
-        <div class="pricing-card pricing-card--secondary fade-up">
-          <div class="lote-tag">⚠️ 2º LOTE</div>
-          <div class="lote-price">
-            <span class="price-label">Quando o 1º lote fechar, o valor sobe</span>
-            <span class="price-value lote2-price">R$ <strong>39,90</strong></span>
-          </div>
-          <button class="btn btn-disabled" disabled aria-disabled="true" data-cta="lote2" data-lote="2" data-value="39.90">
+        <!-- Lote 2 — inativo -->
+        <div class="offer-card offer-card--off">
+          <div class="offer-badge offer-badge--off">⚠️ 2º LOTE</div>
+          <div class="offer-lote">2º LOTE</div>
+          <div class="offer-desc">Quando o 1º lote fechar, o valor sobe</div>
+          <div class="offer-price">R$ <strong>39,90</strong></div>
+          <button class="offer-btn offer-btn--disabled" disabled aria-disabled="true">
             GARANTIR ANTES DO PREÇO SUBIR
           </button>
         </div>
 
-        <!-- Lote 3 -->
-        <div class="pricing-card pricing-card--tertiary fade-up">
-          <div class="lote-tag lote3-tag">🚨 3º LOTE</div>
-          <div class="lote-price">
-            <span class="price-label lote3-label">Última chamada</span>
-            <span class="price-value lote3-price">R$ <strong>49,99</strong></span>
-          </div>
-          <button class="btn btn-tertiary-disabled" disabled aria-disabled="true" data-cta="lote3" data-lote="3" data-value="49.99">
+        <!-- Lote 3 — inativo -->
+        <div class="offer-card offer-card--off">
+          <div class="offer-badge offer-badge--off">🚨 3º LOTE</div>
+          <div class="offer-lote">3º LOTE — Última chamada</div>
+          <div class="offer-desc">Última chamada</div>
+          <div class="offer-price">R$ <strong>49,99</strong></div>
+          <button class="offer-btn offer-btn--disabled" disabled aria-disabled="true">
             QUERO PARTICIPAR MESMO ASSIM
           </button>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===================== CTA FINAL ===================== -->
-  <section class="section-final-cta" aria-label="Chamada final para ação">
-    <div class="container final-inner">
-      <h2 class="fade-up">
-        Sábado, 02 de maio. <em>8h da manhã.</em>
-      </h2>
-      <p class="fade-up final-sub">
+  <!-- ════════ SEÇÃO 8 — URGÊNCIA ════════ -->
+  <section class="s-urgency" aria-label="Chamada final">
+    <div class="container">
+      <h2>Sábado, 02 de maio. <strong>8h da manhã.</strong></h2>
+      <p class="urgency-sub">
         Você pode estar lendo um ECG com segurança — ou pode estar exatamente onde está hoje.<br>
         Essa aula não vai se repetir nesse formato. É ao vivo, é um dia, e quando fechar, fechou.
       </p>
-      <a href="#garantir"
-         class="btn btn-secondary btn-xl fade-up"
-         data-cta="final"
-         data-event="purchase_click"
-         data-lote="1"
-         data-value="29.99">
-        GARANTIR MINHA VAGA AGORA
-      </a>
+      <a href="#garantir" class="urgency-btn" data-cta="final">GARANTIR MINHA VAGA AGORA</a>
     </div>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <svg class="logo-img" width="184" height="153" viewBox="0 0 184 153" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ECG na Prática"><path d="M18.8276 128.915V152H16.1223L3.54287 133.875H3.31743V152H0.521996V128.915H3.22725L15.8518 147.085H16.0772V128.915H18.8276Z" fill="white"/><path d="M25.3681 152H22.4374L30.9139 128.915H33.7995L42.276 152H39.3453L32.4469 132.567H32.2665L25.3681 152ZM26.4502 142.982H38.2632V145.462H26.4502V142.982Z" fill="white"/><path d="M54.7991 152V128.915H62.5992C64.4102 128.915 65.8906 129.242 67.0404 129.896C68.1976 130.542 69.0543 131.417 69.6104 132.522C70.1664 133.627 70.4445 134.859 70.4445 136.219C70.4445 137.579 70.1664 138.816 69.6104 139.928C69.0618 141.04 68.2126 141.927 67.0629 142.588C65.9132 143.242 64.4403 143.569 62.6443 143.569H57.0534V141.089H62.5541C63.794 141.089 64.7897 140.875 65.5412 140.446C66.2927 140.018 66.8375 139.439 67.1756 138.71C67.5213 137.974 67.6941 137.144 67.6941 136.219C67.6941 135.295 67.5213 134.468 67.1756 133.74C66.8375 133.011 66.2889 132.439 65.5299 132.026C64.7709 131.605 63.764 131.395 62.509 131.395H57.5945V152H54.7991Z" fill="white"/><path d="M74.9476 152V128.915H82.7478C84.5513 128.915 86.0316 129.223 87.1889 129.839C88.3461 130.448 89.2028 131.286 89.7589 132.353C90.315 133.42 90.593 134.634 90.593 135.994C90.593 137.354 90.315 138.56 89.7589 139.612C89.2028 140.664 88.3499 141.491 87.2002 142.092C86.0504 142.686 84.5813 142.982 82.7929 142.982H76.4806V140.458H82.7027C83.9351 140.458 84.927 140.277 85.6785 139.917C86.4374 139.556 86.986 139.045 87.3242 138.384C87.6698 137.715 87.8427 136.918 87.8427 135.994C87.8427 135.07 87.6698 134.262 87.3242 133.57C86.9785 132.879 86.4262 132.346 85.6672 131.97C84.9082 131.587 83.905 131.395 82.6576 131.395H77.743V152H74.9476ZM85.8137 141.63L91.4948 152H88.2485L82.6576 141.63H85.8137Z" fill="white"/><path d="M96.198 152H93.2673L101.744 128.915H104.629L113.106 152H110.175L103.277 132.567H103.096L96.198 152ZM97.2801 142.982H109.093V145.462H97.2801V142.982ZM101.969 126.571L104.72 121.34H107.831L104.314 126.571H101.969Z" fill="white"/><path d="M112.742 131.395V128.915H130.056V131.395H122.797V152H120.001V131.395H112.742Z" fill="white"/><path d="M137.166 128.915V152H134.37V128.915H137.166Z" fill="white"/><path d="M161.347 136.129H158.551C158.386 135.325 158.097 134.619 157.683 134.01C157.278 133.401 156.782 132.89 156.196 132.477C155.617 132.056 154.974 131.741 154.268 131.53C153.562 131.32 152.825 131.215 152.059 131.215C150.661 131.215 149.395 131.568 148.26 132.274C147.133 132.981 146.235 134.021 145.566 135.396C144.905 136.772 144.574 138.459 144.574 140.458C144.574 142.456 144.905 144.143 145.566 145.519C146.235 146.894 147.133 147.935 148.26 148.641C149.395 149.347 150.661 149.701 152.059 149.701C152.825 149.701 153.562 149.595 154.268 149.385C154.974 149.175 155.617 148.863 156.196 148.449C156.782 148.029 157.278 147.514 157.683 146.905C158.097 146.289 158.386 145.583 158.551 144.786H161.347C161.136 145.966 160.753 147.022 160.197 147.953C159.641 148.885 158.95 149.678 158.123 150.332C157.296 150.978 156.368 151.47 155.339 151.808C154.317 152.147 153.224 152.316 152.059 152.316C150.09 152.316 148.339 151.835 146.806 150.873C145.273 149.911 144.067 148.543 143.188 146.77C142.309 144.996 141.869 142.892 141.869 140.458C141.869 138.023 142.309 135.919 143.188 134.145C144.067 132.372 145.273 131.004 146.806 130.042C148.339 129.08 150.09 128.6 152.059 128.6C153.224 128.6 154.317 128.769 155.339 129.107C156.368 129.445 157.296 129.941 158.123 130.595C158.95 131.241 159.641 132.03 160.197 132.962C160.753 133.886 161.136 134.942 161.347 136.129Z" fill="white"/><path d="M166.811 152H163.88L172.357 128.915H175.242L183.719 152H180.788L173.89 132.567H173.709L166.811 152ZM167.893 142.982H179.706V145.462H167.893V142.982Z" fill="white"/><path d="M72.5342 114.786L78.8086 115.083L81.3965 97.5537C82.3674 98.6891 83.678 99.2578 85.3301 99.2578C87.3584 99.2577 88.7785 98.4236 89.5898 96.7559C90.4462 95.0881 90.874 92.924 90.874 90.2646V80.4688L91.7451 79.2266C91.8664 79.0538 92.1201 79.0475 92.25 79.2139L98.6455 87.4268C100.065 89.25 102.334 90.2019 104.63 89.9385L113.688 88.8984L114.81 89.0215V91.3467C114.81 101.804 112.172 109.4 106.898 114.133C101.625 118.821 94.2549 121.165 84.7891 121.165C76.1797 121.165 69.2378 118.483 63.9639 113.119C58.7351 107.755 56.1202 100.25 56.1201 90.6035V90.1807H58.8984C58.9626 90.1807 59.0264 90.2006 59.0791 90.2373L67.126 95.8379L69.6201 59L72.5342 114.786Z" fill="white"/><path d="M180.531 120.083H170.997L166.94 110.076C162.793 117.469 156.257 121.165 147.332 121.165C131.585 121.165 123.135 110.714 121.979 89.8135L125.124 90.1611L125.296 90.1807H145.414C145.538 92.6013 145.93 94.6357 146.589 96.2832C147.445 98.2662 149.091 99.2578 151.524 99.2578C154.048 99.2578 155.716 98.2662 156.527 96.2832C157.384 94.2549 157.812 91.5951 157.812 88.3047V71.333H151.457V50.7783H180.531V120.083Z" fill="white"/><path d="M24.2061 96.8916H49.1562V120.083H0V88.8789H24.2061V96.8916Z" fill="white"/><path d="M85.3301 0C90.9644 3.19211e-05 95.9676 1.03695 100.34 3.11035C104.757 5.18386 108.229 8.29439 110.753 12.4414C113.277 16.5433 114.539 21.7268 114.539 27.9922V48.5469H90.874V30.9668C90.874 27.406 90.423 25.0168 89.5215 23.7998C88.62 22.538 87.2229 21.9073 85.3301 21.9072C83.1214 21.9072 81.6335 22.7182 80.8672 24.3408C80.1009 25.9185 79.7178 28.0378 79.7178 30.6973V85.1426C78.8076 85.5043 78.0069 86.0923 77.3955 86.8467L73.1797 6.13184L66.8799 6.08301L61.5713 84.4326C60.7336 84.0636 59.8231 83.8711 58.8984 83.8711H56.1201V35.7002C56.1201 24.1607 58.3965 15.3257 62.9492 9.19531C67.547 3.06494 75.0076 0 85.3301 0Z" fill="white"/><path d="M151.051 0C159.074 0 165.228 1.62267 169.51 4.86816C173.792 8.06853 176.744 12.7563 178.367 18.9316C179.99 25.107 180.802 32.6348 180.802 41.5146H157.542V30.9668C157.542 28.3977 157.181 26.2567 156.46 24.5439C155.784 22.786 154.342 21.9072 152.133 21.9072C149.383 21.9072 147.558 22.8309 146.656 24.6787C145.8 26.5268 145.371 28.5559 145.371 30.7646V83.8711H125.649L121.842 83.4502V33.334C121.842 11.1115 131.578 7.80496e-05 151.051 0Z" fill="white"/><path d="M114.81 82.6738L113.676 82.5488L103.91 83.6699C103.801 83.6823 103.693 83.6369 103.626 83.5508L97.2305 75.3379C95.6412 73.2971 93.1691 72.4883 90.874 72.8809V68.8311H114.81V82.6738Z" fill="white"/><path d="M47.6006 24.0703H24.2061V47.2627H46.6543V69.6426H24.2061V82.5684H0V1.08203H47.6006V24.0703Z" fill="white"/></svg>
-      <p class="footer-copy">&copy; 2025 ECG na Prática. Todos os direitos reservados.</p>
-    </div>
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <p>© 2025 ECG na Prática. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- ===================== STICKY POPUP ===================== -->
-  <div id="sticky-popup" class="sticky-popup" role="dialog" aria-label="Oferta especial" aria-live="polite">
-    <div class="sticky-popup-inner">
-      <div class="sticky-popup-text">
-        <span class="sticky-popup-label">🔥 1º Lote — Menor preço</span>
-        <span class="sticky-popup-price">R$ <strong>29,99</strong></span>
-      </div>
-      <a href="#garantir"
-         class="btn btn-primary sticky-popup-cta"
-         data-cta="sticky-popup"
-         data-event="purchase_click"
-         data-lote="1"
-         data-value="29.99">
-        GARANTIR AGORA
-      </a>
-      <button class="sticky-popup-close" aria-label="Fechar oferta">✕</button>
+  <!-- ════════ STICKY BAR ════════ -->
+  <div id="sticky-bar" class="sticky-bar" role="complementary" aria-label="Oferta especial" aria-live="polite">
+    <div class="sticky-bar-inner">
+      <span class="sticky-badge">🔥 1º Lote — Menor preço</span>
+      <span class="sticky-price">R$ <strong>29,99</strong></span>
+      <div class="sticky-spacer"></div>
+      <a href="#garantir" class="sticky-btn" id="sticky-cta" data-cta="sticky">GARANTIR AGORA</a>
+      <button class="sticky-close" id="sticky-close" aria-label="Fechar">✕</button>
     </div>
   </div>
 
-  <script src="script.js" defer></script>
+  <script>
+    // Sticky bar
+    (function () {
+      var bar      = document.getElementById('sticky-bar');
+      var closeBtn = document.getElementById('sticky-close');
+      var ctaBtn   = document.getElementById('sticky-cta');
+      var offer    = document.getElementById('garantir');
+
+      if (localStorage.getItem('ecg-sticky-closed')) return;
+
+      var shown = false;
+
+      function inView(el) {
+        var r = el.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom > 0;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (localStorage.getItem('ecg-sticky-closed')) return;
+        var p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (p >= 0.40) shown = true;
+        if (offer && inView(offer)) {
+          bar.classList.remove('visible');
+        } else if (shown) {
+          bar.classList.add('visible');
+        }
+      }, { passive: true });
+
+      closeBtn.addEventListener('click', function () {
+        bar.classList.remove('visible');
+        localStorage.setItem('ecg-sticky-closed', '1');
+      });
+
+      ctaBtn.addEventListener('click', function () {
+        bar.classList.remove('visible');
+      });
+    }());
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href');
+        if (href === '#') return;
+        var t = document.querySelector(href);
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
 </body>
 </html>
