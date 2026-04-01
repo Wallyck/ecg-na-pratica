@@ -52,15 +52,49 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      background:
-        linear-gradient(to right, #470600 0%, #470600 28%, transparent 55%),
-        url('IMAGE _ DOBRA 1 _ DESKTOP.png') right center / cover no-repeat;
+      background: linear-gradient(76.6deg, #470600 16.6%, #7E0001 104.1%);
       background-color: #470600;
       overflow: hidden;
       border-bottom: 1px solid var(--cream);
       display: flex;
       align-items: center;
     }
+
+    /* Hero photo — absolute no desktop, block no mobile */
+    .hero-photo-wrap {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 56%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #470600 0%, rgba(71,6,0,0.6) 30%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 28%;
+      background: linear-gradient(to top, #470600 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-photo-wrap picture { display: block; width: 100%; height: 100%; }
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    /* Logo sobre a foto (mobile) */
+    .hero-photo-logo { display: none; }
 
     /* Luzes difusas decorativas */
     .hero-lights {
@@ -105,9 +139,6 @@
       align-items: center;
     }
     .hero-ecg svg { width: 100%; }
-
-    /* Mobile image — oculto no desktop */
-    .hero-mobile-img { display: none; }
 
     /* Conteúdo */
     .hero-inner {
@@ -778,6 +809,23 @@
     /* ════════════════════════════════════════════════════
        RESPONSIVO — max 768px
     ════════════════════════════════════════════════════ */
+    /* Tablet (768–1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-photo-wrap { width: 52%; }
+      .hero-content { max-width: 440px; }
+      .hero-headline { font-size: 40px; line-height: 58px; }
+      .event-grid { grid-template-columns: 1fr 1fr; }
+      .auth-inner { grid-template-columns: 260px 1fr; gap: 40px; }
+      .offer-grid { grid-template-columns: 1fr; max-width: 480px; }
+    }
+
+    /* Notebook (1024–1279px) */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .hero-photo-wrap { width: 54%; }
+      .hero-content { max-width: 500px; }
+      .hero-headline { font-size: 44px; line-height: 66px; }
+    }
+
     @media (max-width: 768px) {
       body { font-size: 18px; }
 
@@ -790,17 +838,20 @@
       .hero-lights,
       .hero-ecg { display: none; }
 
-      .hero-mobile-img {
-        display: block;
+      .hero-photo-wrap {
         position: relative;
         width: 100%;
-        overflow: hidden;
+        height: 220px;
+        bottom: auto;
       }
-      .hero-mobile-img > img:first-child {
-        width: 100%;
+      .hero-photo-wrap::after,
+      .hero-photo-wrap::before { display: none; }
+      .hero-photo-wrap img {
+        object-position: center top;
+      }
+
+      .hero-photo-logo {
         display: block;
-      }
-      .hero-mobile-logo {
         position: absolute;
         top: 16px; left: 20px;
         height: 44px;
@@ -878,10 +929,15 @@
   <!-- ════════ SEÇÃO 1 — HERO ════════ -->
   <section class="hero" aria-label="Apresentação do curso">
 
-    <!-- Imagem mobile (visível só em mobile) -->
-    <div class="hero-mobile-img" aria-hidden="true">
-      <img src="IMAGE MOBILE.webp" alt="" />
-      <img src="Logo.svg" class="hero-mobile-logo" alt="ECG na Prática" />
+    <!-- Foto responsiva -->
+    <div class="hero-photo-wrap" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 1280px)" srcset="IMAGE%20_%20DOBRA%201%20_%20DESKTOP.png">
+        <source media="(min-width: 1024px)" srcset="NOTEBOOK%20CC.jpg">
+        <source media="(min-width: 768px)" srcset="TABLET%20CC.png">
+        <img src="IMAGE%20MOBILE.webp" alt="">
+      </picture>
+      <img src="Logo.svg" class="hero-photo-logo" alt="ECG na Prática" />
     </div>
 
     <!-- Luzes difusas (desktop) -->
