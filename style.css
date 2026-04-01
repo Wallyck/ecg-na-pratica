@@ -184,6 +184,11 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   color: var(--sand);
 }
+.logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
 
 /* ============================================================
    HERO
