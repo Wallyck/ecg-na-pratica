@@ -194,18 +194,16 @@ img { display: block; max-width: 100%; }
    HERO
    ============================================================ */
 .hero {
-  background: url('IMAGE _ DOBRA 1 _ DESKTOP.png') right center / cover no-repeat var(--dark-red);
+  background: url('NOTEBOOK CC.jpg') right center / cover no-repeat var(--dark-red);
   position: relative;
 }
-
-.hero-mobile-visual { display: none; }
 
 .hero-inner {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  padding-top: 120px; /* espaço para logo absoluta + respiro */
+  padding-top: 120px;
   padding-bottom: 72px;
   min-height: 520px;
 }
@@ -214,24 +212,25 @@ img { display: block; max-width: 100%; }
   max-width: 520px;
 }
 
+/* Tablet */
+@media (max-width: 1023px) {
+  .hero {
+    background-image: url('TABLET CC.png');
+    background-position: right center;
+  }
+}
+
 /* Mobile */
 @media (max-width: 767px) {
-  .site-header { display: none; } /* logo está embutida na imagem mobile */
+  .site-header { display: block; }
   .hero {
-    background-image: none;
-    background-color: var(--dark-red);
-  }
-  .hero-mobile-visual {
-    display: block;
-  }
-  .hero-mobile-visual img {
-    width: 100%;
-    display: block;
+    background-image: url('IMAGE MOBILE.webp');
+    background-position: right center;
   }
   .hero-inner {
-    padding-top: 36px;
+    padding-top: 100px;
     padding-bottom: 52px;
-    min-height: auto;
+    min-height: 420px;
   }
   .hero-content { max-width: 100%; }
 }
