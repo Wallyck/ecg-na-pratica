@@ -1,42 +1,88 @@
-"use client";
-
-/* Seção 5 — Autoridade / Professor */
-
-const stats = [
-  { value: "+470.000", label: "seguidores" },
-  { value: "+42.000",  label: "alunos formados" },
-  { value: "17",       label: "países" },
-];
-
-const BLUR_PLACEHOLDER =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
-
+/* Instructor — fundo #470600, duas colunas */
 export default function Instructor() {
   return (
     <section
       aria-label="Sobre o professor"
-      style={{
-        padding: "80px 5%",
-        background: "#3D0A0A",
-      }}
+      style={{ background: "#470600", padding: "80px 0" }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <div className="container">
         <div
+          className="instructor-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "380px 1fr",
-            gap: 64,
+            gridTemplateColumns: "523px 510px",
+            gap: 130,
             alignItems: "start",
+            maxWidth: 1163,
+            margin: "0 auto",
           }}
-          className="auth-inner"
         >
-          {/* Foto */}
+          {/* ── Coluna esquerda: texto ── */}
+          <div>
+            {/* Badge pill */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                background: "rgba(255,255,255,0.15)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: 96,
+                padding: "6px 16px",
+                fontSize: 12,
+                color: "#FFFFFF",
+                marginBottom: 20,
+              }}
+            >
+              Prof. Raphael Marinho
+            </div>
+
+            {/* Título */}
+            <h2
+              style={{
+                fontSize: "clamp(1.5rem, 2.5vw, 35px)",
+                fontWeight: 600,
+                color: "#FFFFFF",
+                lineHeight: "146%",
+                marginBottom: 32,
+              }}
+            >
+              Conheça seu Professor
+            </h2>
+
+            {/* 4 parágrafos */}
+            {[
+              "O Prof. Raphael Marinho é enfermeiro especialista em Terapia Intensiva (AMIB/ABENTI) e Emergência (COBEEM), Fellow premiado da Sociedade Brasileira de Medicina de Emergência e coautor da resolução que liberou o enfermeiro a manejar ventilação mecânica no Brasil.",
+              "Com 15 anos de experiência na linha de frente – hoje no Hospital Universitário do Maranhão – ele transformou o conhecimento que salvou incontáveis vidas em um método didático, direto ao ponto e ancorado nas melhores evidências científicas.",
+              "Raphael já percorreu 23 dos 26 estados brasileiros com cursos e palestras, liderou lives que figuraram entre as mais assistidas do mundo durante a pandemia e, em 2019, fundou a NurseFlix, plataforma que já formou mais de 40.000 profissionais em 17 países.",
+              "Seu propósito é claro: resgatar a vocação dos heróis da Enfermagem, devolvendo-lhes confiança clínica, autonomia nas decisões e o reconhecimento que sempre mereceram.",
+            ].map((p) => (
+              <p
+                key={p.slice(0, 30)}
+                style={{
+                  fontSize: 18,
+                  fontWeight: 400,
+                  color: "#FFFFFF",
+                  lineHeight: "32px",
+                  marginBottom: 20,
+                }}
+              >
+                {p}
+              </p>
+            ))}
+          </div>
+
+          {/* ── Coluna direita: card com foto ── */}
           <div
+            className="instructor-photo-card"
             style={{
+              background: "linear-gradient(194.99deg, #F6E3CE -75.26%, #C3AD8A 89.44%)",
+              border: "1px solid #FFFFFF",
               borderRadius: 20,
+              width: 510,
+              maxWidth: "100%",
+              height: 775,
               overflow: "hidden",
-              aspectRatio: "3 / 4",
-              background: "#2D0505",
+              position: "relative",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,133 +96,37 @@ export default function Instructor() {
                 objectPosition: "62% top",
                 display: "block",
               }}
-              onError={(e) => {
-                // Fallback: esconde a imagem se não existir
-                (e.target as HTMLImageElement).style.display = "none";
+            />
+            {/* Vinheta inferior */}
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                bottom: 0, left: 0, right: 0,
+                height: "35%",
+                background: "linear-gradient(180deg, rgba(52,45,34,0) 0%, #342D22 100%)",
+                pointerEvents: "none",
               }}
             />
-          </div>
-
-          {/* Texto */}
-          <div>
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "#7E1010",
-                marginBottom: 10,
-              }}
-            >
-              Quem vai te ensinar isso
-            </p>
-
-            <h2
-              style={{
-                fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
-                fontWeight: 600,
-                color: "rgba(246,227,206,0.95)",
-                marginBottom: 20,
-                lineHeight: 1.2,
-              }}
-            >
-              Prof. Raphael Marinho
-            </h2>
-
-            <p
-              style={{
-                fontSize: 17,
-                color: "rgba(246,227,206,0.65)",
-                lineHeight: 1.8,
-                marginBottom: 36,
-              }}
-            >
-              O Prof. Raphael Marinho é enfermeiro especialista em Terapia Intensiva
-              (AMIB/ABENTI) e Emergência (COBEEM), Fellow premiado da Sociedade Brasileira
-              de Medicina de Emergência e coautor da resolução que liberou o enfermeiro a
-              manejar ventilação mecânica no Brasil. Com{" "}
-              <strong style={{ color: "rgba(246,227,206,0.9)" }}>15 anos de experiência</strong>{" "}
-              na linha de frente — hoje no Hospital Universitário do Maranhão — ele
-              transformou o conhecimento que salvou incontáveis vidas em um método
-              didático, direto ao ponto e ancorado nas melhores evidências científicas.
-              Raphael já percorreu{" "}
-              <strong style={{ color: "rgba(246,227,206,0.9)" }}>
-                23 dos 26 estados brasileiros
-              </strong>{" "}
-              com cursos e palestras, liderou lives que figuraram entre as mais assistidas
-              do mundo durante a pandemia e, em 2019, fundou a{" "}
-              <strong style={{ color: "rgba(246,227,206,0.9)" }}>NurseFlix</strong>,
-              plataforma que já formou mais de{" "}
-              <strong style={{ color: "rgba(246,227,206,0.9)" }}>
-                40.000 profissionais em 17 países
-              </strong>
-              .
-            </p>
-
-            {/* Stats cards */}
-            <div style={{ display: "flex", gap: 14, marginBottom: 32, flexWrap: "wrap" }}>
-              {stats.map(({ value, label }) => (
-                <div
-                  key={label}
-                  style={{
-                    padding: "16px 22px",
-                    background: "#2D0505",
-                    borderRadius: 12,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 4,
-                    border: "1px solid rgba(246,227,206,0.08)",
-                  }}
-                >
-                  <strong
-                    style={{
-                      fontSize: 26,
-                      fontWeight: 600,
-                      color: "rgba(246,227,206,0.95)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {value}
-                  </strong>
-                  <span style={{ fontSize: 13, color: "rgba(246,227,206,0.5)" }}>
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Quote */}
-            <div
-              style={{
-                fontSize: 18,
-                fontStyle: "italic",
-                fontWeight: 600,
-                color: "rgba(246,227,206,0.9)",
-                padding: "20px 24px",
-                borderLeft: "4px solid #7E1010",
-                background: "rgba(45,5,5,0.5)",
-                borderRadius: "0 12px 12px 0",
-              }}
-            >
-              <em>Raphael não ensina teoria. Ele ensina o que funciona no plantão.</em>
-            </div>
           </div>
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .auth-inner {
-            grid-template-columns: 260px 1fr !important;
-            gap: 40px !important;
+        @media (max-width: 1100px) {
+          .instructor-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 60px !important;
+            max-width: 960px !important;
           }
+          .instructor-photo-card { width: 100% !important; height: 500px !important; }
         }
         @media (max-width: 768px) {
-          .auth-inner {
+          .instructor-grid {
             grid-template-columns: 1fr !important;
-            gap: 32px !important;
+            gap: 40px !important;
           }
+          .instructor-photo-card { height: 380px !important; }
         }
       `}</style>
     </section>

@@ -1,86 +1,99 @@
-/* Seção 6 — Para quem é */
+import { Check } from "lucide-react";
 
-const targets = [
-  "✅ É enfermeiro e ainda trava diante do ECG",
-  "✅ Quer ter segurança para interpretar traçados no plantão",
-  "✅ Trabalha ou quer trabalhar em UTI, emergência ou cardiologia",
-  "✅ Quer tomar decisões com autonomia, sem depender de médico ou colega",
-  "✅ É acadêmico de enfermagem e quer sair na frente",
+/* TargetAudience — fundo #FFF4E8, 5 cards em 2 colunas (último centralizado) */
+
+const items = [
+  { text: "É enfermeiro e ainda trava diante do ECG", primary: true },
+  { text: "Quer ter segurança para interpretar traçados no plantão" },
+  { text: "Trabalha ou quer trabalhar em UTI, emergência ou cardiologia" },
+  { text: "Quer tomar decisões com autonomia, sem depender de médico ou colega" },
+  { text: "É acadêmico de enfermagem e quer sair na frente" },
 ];
 
 export default function TargetAudience() {
+  const firstFour = items.slice(0, 4);
+  const last      = items[4];
+
   return (
     <section
       aria-label="Público do curso"
-      style={{
-        padding: "80px 5%",
-        background: "#2D0505",
-      }}
+      style={{ background: "#FFF4E8", padding: "80px 0" }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <div className="container">
+        {/* Título centralizado */}
         <h2
           style={{
-            fontSize: "clamp(1.4rem, 3vw, 2.25rem)",
+            fontSize: "clamp(1.5rem, 2.5vw, 35px)",
             fontWeight: 400,
-            color: "rgba(246,227,206,0.95)",
-            marginBottom: 36,
-            lineHeight: 1.3,
+            color: "#2D2D2D",
+            textAlign: "center",
+            marginBottom: 40,
           }}
         >
-          Essa aula é{" "}
-          <strong style={{ fontWeight: 600 }}>pra você</strong> se:
+          Essa aula é pra você se:
         </h2>
 
-        {/* Lista simples */}
-        <ul
-          style={{
-            listStyle: "none",
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            maxWidth: 720,
-            marginBottom: 32,
-          }}
-        >
-          {targets.map((item) => (
-            <li
-              key={item}
-              style={{
-                padding: "16px 20px",
-                background: "rgba(61,10,10,0.8)",
-                borderRadius: 12,
-                fontSize: 18,
-                fontWeight: 600,
-                color: "rgba(246,227,206,0.88)",
-                border: "1px solid rgba(246,227,206,0.07)",
-              }}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+        <div style={{ maxWidth: 933, margin: "0 auto" }}>
+          {/* Grid 2 × 2 (primeiros 4) */}
+          <div
+            className="who-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: 15,
+              marginBottom: 15,
+            }}
+          >
+            {firstFour.map(({ text, primary }) => (
+              <Card key={text} text={text} primary={!!primary} />
+            ))}
+          </div>
 
-        {/* Divisor + nota negativa */}
-        <div
-          style={{
-            width: 48,
-            height: 3,
-            background: "rgba(246,227,206,0.15)",
-            borderRadius: 100,
-            marginBottom: 20,
-          }}
-        />
-        <p
-          style={{
-            fontSize: 16,
-            color: "rgba(246,227,206,0.4)",
-            fontStyle: "italic",
-            maxWidth: 600,
-          }}
-        >
-          Não é pra você se só quer mais um certificado pra colocar no currículo sem aplicar na prática.
-        </p>
+          {/* 5º card centralizado */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ width: "calc(50% - 7.5px)" }} className="who-last">
+              <Card text={last.text} primary={false} />
+            </div>
+          </div>
+        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .who-grid { grid-template-columns: 1fr !important; }
+          .who-last { width: 100% !important; }
+        }
+      `}</style>
     </section>
+  );
+}
+
+/* Sub-componente de card */
+function Card({ text, primary }: { text: string; primary: boolean }) {
+  return (
+    <div
+      style={{
+        background: primary ? "#9D0E0F" : "#7E0001",
+        boxShadow: primary ? "0px 4px 7.3px rgba(0,0,0,0.37)" : "none",
+        borderRadius: 6,
+        padding: "25px 30px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 16,
+      }}
+    >
+      <div
+        style={{
+          width: 38, height: 38, minWidth: 38,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          flexShrink: 0, marginTop: 2,
+        }}
+      >
+        <Check size={28} color="#F6E3CE" strokeWidth={2.5} />
+      </div>
+      <p style={{ fontSize: 18, fontWeight: 400, color: "#FFFFFF", lineHeight: "170%" }}>
+        {text}
+      </p>
+    </div>
   );
 }

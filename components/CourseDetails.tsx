@@ -1,91 +1,108 @@
-/* Seção 3 — Solução / Evento */
+import { Calendar, Award, Clock } from "lucide-react";
 
-const cards = [
-  { icon: "📅", label: "Sábado, 02 de maio" },
-  { icon: "⏰", label: "Das 8h às 18h" },
-  { icon: "💻", label: "Online e ao vivo" },
-  { icon: "📄", label: "Com certificado" },
-];
-
+/* CourseDetails — fundo #470600, duas colunas */
 export default function CourseDetails() {
   return (
     <section
       aria-label="Sobre o evento"
-      style={{
-        padding: "80px 5%",
-        background: "#2D0505",
-      }}
+      style={{ background: "#470600", padding: "80px 0" }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <h2
-          style={{
-            fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
-            fontWeight: 600,
-            lineHeight: 1.25,
-            color: "rgba(246,227,206,0.95)",
-            marginBottom: 20,
-            maxWidth: 720,
-          }}
-        >
-          ECG na Prática é uma aula ao vivo,{" "}
-          <em style={{ fontStyle: "italic" }}>do zero ao avançado,</em> em um único dia.
-        </h2>
-
-        <p
-          style={{
-            fontSize: 20,
-            color: "rgba(246,227,206,0.7)",
-            marginBottom: 48,
-            maxWidth: 620,
-            lineHeight: 1.65,
-          }}
-        >
-          8 horas de imersão completa, com raciocínio clínico aplicado à realidade do
-          enfermeiro no plantão.
-        </p>
-
-        {/* Grid 2×2 de cards */}
+      <div className="container">
         <div
+          className="course-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 16,
-            maxWidth: 860,
+            gridTemplateColumns: "477px 391px",
+            gap: 125,
+            alignItems: "start",
+            maxWidth: 1043,
+            margin: "0 auto",
           }}
-          className="event-grid"
         >
-          {cards.map(({ icon, label }) => (
-            <div
-              key={label}
+          {/* Coluna esquerda — texto */}
+          <div>
+            <h2
               style={{
-                padding: "24px 20px",
-                background: "rgba(246,227,206,0.06)",
-                border: "1px solid rgba(246,227,206,0.12)",
-                borderRadius: 16,
+                fontSize: "clamp(1.5rem, 2.5vw, 35px)",
+                fontWeight: 400,
+                color: "#FFFFFF",
+                lineHeight: "52px",
+                marginBottom: 24,
+              }}
+              className="course-headline"
+            >
+              ECG na Prática é uma Imersão ao vivo, do zero ao avançado, em um único dia.
+            </h2>
+            <p style={{ fontSize: 18, fontWeight: 400, color: "#FFFFFF", lineHeight: "170%" }}>
+              8 horas de imersão completa, com raciocínio clínico aplicado à realidade do
+              enfermeiro no plantão.
+            </p>
+          </div>
+
+          {/* Coluna direita — 3 badges com border-left */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+            {/* Badge largo — data */}
+            <div
+              style={{
+                background: "#9D0E0F",
+                borderLeft: "2px solid #F6E3CE",
+                borderRadius: 6,
+                padding: "25px 30px",
                 display: "flex",
-                flexDirection: "column",
-                gap: 10,
+                alignItems: "center",
+                gap: 14,
+                boxShadow: "0px 4px 7.3px rgba(0,0,0,0.37)",
               }}
             >
-              <span style={{ fontSize: 26 }}>{icon}</span>
-              <span
-                style={{
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: "rgba(246,227,206,0.9)",
-                  lineHeight: 1.4,
-                }}
-              >
-                {label}
+              <Calendar size={22} color="#F6E3CE" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: 18, fontWeight: 400, color: "#FFFFFF", lineHeight: "170%" }}>
+                Sábado, 02 de maio
               </span>
             </div>
-          ))}
+
+            {/* Badge — certificado */}
+            <div
+              style={{
+                background: "#7E0001",
+                borderLeft: "2px solid #F6E3CE",
+                borderRadius: 6,
+                padding: "25px 30px",
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+              }}
+            >
+              <Award size={22} color="#F6E3CE" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: 18, fontWeight: 400, color: "#FFFFFF", lineHeight: "170%" }}>
+                Com certificado
+              </span>
+            </div>
+
+            {/* Badge — horário */}
+            <div
+              style={{
+                background: "#7E0001",
+                borderLeft: "2px solid #F6E3CE",
+                borderRadius: 6,
+                padding: "25px 30px",
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+              }}
+            >
+              <Clock size={22} color="#F6E3CE" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: 18, fontWeight: 400, color: "#FFFFFF", lineHeight: "170%" }}>
+                Das 8h às 18h
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          .event-grid { grid-template-columns: 1fr 1fr !important; }
+        @media (max-width: 900px) {
+          .course-grid { grid-template-columns: 1fr !important; gap: 48px !important; max-width: 560px !important; }
+          .course-headline { line-height: 1.3 !important; }
         }
       `}</style>
     </section>

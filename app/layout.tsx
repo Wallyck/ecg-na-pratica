@@ -1,6 +1,22 @@
 import type { Metadata } from "next";
+import { Inter, Anton } from "next/font/google";
 import "./globals.css";
 
+/* ── Fontes ─────────────────────────────────────── */
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anton",
+  display: "swap",
+});
+
+/* ── SEO ────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: "ECG na Prática | Aprenda a Interpretar Qualquer ECG em Um Dia",
   description:
@@ -13,19 +29,12 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: "ECG na Prática",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${inter.variable} ${anton.variable}`}>
       <body>{children}</body>
     </html>
   );
