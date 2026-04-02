@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Anton } from "next/font/google";
 import "./globals.css";
 
-/* ── Fontes ─────────────────────────────────────── */
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -16,7 +15,6 @@ const anton = Anton({
   display: "swap",
 });
 
-/* ── SEO ────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: "ECG na Prática | Aprenda a Interpretar Qualquer ECG em Um Dia",
   description:

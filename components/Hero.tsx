@@ -1,210 +1,313 @@
 "use client";
 
-/* Hero — layout split: texto à esquerda, imagem à direita */
+import Image from "next/image";
+
+/*
+ * Hero — Dobra 1
+ * Desktop: coluna de texto à esquerda (left: 390px, width: 529px),
+ *          imagem do Raphael à direita (absoluta, left: 744px, top: -56px).
+ * Mobile:  bloco de imagem 193px no topo + logo + conteúdo centralizado abaixo.
+ */
 export default function Hero() {
-  const scrollToOffer = () =>
+  const scrollToGarantir = () =>
     document.getElementById("garantir")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section
-      aria-label="Apresentação do curso"
-      style={{
-        position: "relative",
-        minHeight: "100vh",
-        background: "linear-gradient(84.46deg, #470600 16.6%, #7E0001 104.11%)",
-        borderBottom: "5px solid #F6E3CE",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      {/* ── Foto: ocupa metade direita no desktop ── */}
-      <div
-        aria-hidden="true"
-        className="hero-photo"
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: "56%",
-          zIndex: 1,
-          overflow: "hidden",
-        }}
-      >
-        {/* Gradiente de fusão com o fundo */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to right, #470600 0%, rgba(71,6,0,0.55) 30%, transparent 55%)",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            bottom: 0, left: 0, right: 0,
-            height: "28%",
-            background: "linear-gradient(to top, #470600 0%, transparent 100%)",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
+    <>
+      {/* ── Estilos de responsividade ── */}
+      <style>{`
+        @keyframes pulse-dot {
+          0%,100% { opacity:1; transform:scale(1); }
+          50%      { opacity:.5; transform:scale(.8); }
+        }
 
-        {/* Imagem responsiva */}
-        <picture style={{ display: "block", width: "100%", height: "100%" }}>
-          <source media="(min-width: 1280px)" srcSet="/images/IMAGE-DOBRA1-DESKTOP.png" />
-          <source media="(min-width: 1024px)" srcSet="/images/NOTEBOOK-CC.png" />
-          <source media="(min-width: 768px)"  srcSet="/images/TABLET-CC.png" />
+        /* ── Desktop ── */
+        .hero-section {
+          position: relative;
+          min-height: 782px;
+          overflow: hidden;
+          background: linear-gradient(84.46deg, #470600 16.6%, #7E0001 104.11%);
+          border-bottom: 5px solid #F6E3CE;
+        }
+
+        /* Coluna de texto: absoluta, left 390px */
+        .hero-text-col {
+          position: absolute;
+          left: 390px;
+          top: 0;
+          width: 529px;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          z-index: 2;
+        }
+
+        /* Menu (logo) */
+        .hero-menu {
+          height: 103px;
+          display: flex;
+          align-items: center;
+        }
+
+        /* Itens abaixo do menu com gap 57px entre eles */
+        .hero-body {
+          display: flex;
+          flex-direction: column;
+          gap: 57px;
+          padding-bottom: 57px;
+        }
+
+        /* Imagem: absoluta, fora do fluxo */
+        .hero-img-wrap {
+          position: absolute;
+          left: 744px;
+          top: -56px;
+          width: 990px;
+          height: 1486px;
+          z-index: 1;
+        }
+        .hero-img-wrap picture,
+        .hero-img-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+        }
+
+        /* Bloco mobile de imagem — oculto no desktop */
+        .hero-mobile-top { display: none; }
+
+        /* ── Mobile / Tablet ── */
+        @media (max-width: 768px) {
+          .hero-section {
+            background: linear-gradient(183deg, #470600 25%, #7E0001 116%);
+            min-height: unset;
+          }
+          .hero-text-col {
+            position: static;
+            width: 100%;
+            left: unset;
+            padding: 28px 24px 52px;
+            text-align: center;
+            align-items: center;
+          }
+          .hero-menu { display: none; }
+          .hero-body { gap: 32px; width: 100%; align-items: center; }
+
+          .hero-img-wrap { display: none; }
+
+          .hero-mobile-top {
+            display: flex;
+            position: relative;
+            height: 193px;
+            overflow: hidden;
+            align-items: center;
+          }
+          .hero-mobile-logo {
+            position: absolute;
+            left: 48px;
+            z-index: 2;
+          }
+          .hero-mobile-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 65%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+          }
+
+          .hero-title    { font-size: 36px !important; line-height: 1.2 !important; text-align: center; }
+          .hero-subtitle { font-size: 18px !important; text-align: center; max-width: 100% !important; }
+          .hero-cta-btn  { width: 100% !important; max-width: 363px !important; }
+          .hero-price    { font-size: 18px !important; text-align: center; }
+        }
+
+        /* ── Ajuste intermediate (1024–1200px) ── */
+        @media (min-width: 769px) and (max-width: 1280px) {
+          .hero-text-col { left: clamp(40px, 27vw, 390px); width: clamp(300px, 40vw, 529px); }
+          .hero-img-wrap { left: clamp(500px, 52vw, 744px); }
+        }
+      `}</style>
+
+      <section className="hero-section" aria-label="Apresentação do curso">
+
+        {/* ── Mobile: bloco topo com imagem + logo ── */}
+        <div className="hero-mobile-top" aria-hidden="true">
+          {/* Gradiente sobre a imagem */}
+          <div style={{
+            position: "absolute", inset: 0, zIndex: 1,
+            background: "linear-gradient(to right, #470600 30%, transparent 60%)",
+            pointerEvents: "none",
+          }} />
+          {/* Logo mobile */}
+          <div className="hero-mobile-logo" style={{ zIndex: 2 }}>
+            <Image
+              src="/images/LOGO-01.svg"
+              alt="ECG na Prática"
+              width={122}
+              height={50}
+              priority
+              style={{ height: 50, width: "auto" }}
+            />
+          </div>
+          {/* Foto mobile */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/IMAGE-MOBILE.png"
             alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }}
+            className="hero-mobile-photo"
           />
-        </picture>
-      </div>
+        </div>
 
-      {/* ── Linha ECG decorativa (desktop) ── */}
-      <div
-        aria-hidden
-        className="hero-ecg-deco"
-        style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none", display: "flex", alignItems: "center" }}
-      >
-        <svg viewBox="0 0 1920 120" fill="none" style={{ width: "100%" }}>
-          <polyline
-            points="0,60 180,60 220,60 240,14 262,106 282,8 302,112 322,60 380,60 560,60 600,60 622,16 644,104 664,9 684,111 704,60 760,60 940,60 980,60 1002,14 1024,106 1044,8 1064,112 1084,60 1140,60 1320,60 1360,60 1382,16 1404,104 1424,9 1444,111 1464,60 1520,60 1700,60 1740,60 1762,15 1784,105 1804,8 1824,113 1844,60 1920,60"
-            stroke="#F6E3CE"
-            strokeWidth="2"
-            strokeOpacity="0.15"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
+        {/* ── Coluna de texto ── */}
+        <div className="hero-text-col">
 
-      {/* ── Conteúdo textual ── */}
-      <div
-        className="container"
-        style={{ position: "relative", zIndex: 2, width: "100%" }}
-      >
-        <div
-          className="hero-content"
-          style={{ maxWidth: 529, padding: "120px 0 80px" }}
-        >
-          {/* Tag de evento com ponto pulsante */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
+          {/* Menu — logo (desktop) */}
+          <div className="hero-menu">
+            <Image
+              src="/images/LOGO-01.svg"
+              alt="ECG na Prática"
+              width={77}
+              height={64}
+              priority
+              style={{ width: 77, height: 64 }}
+            />
+          </div>
+
+          {/* Corpo: tag + título + subtítulo + CTA */}
+          <div className="hero-body">
+
+            {/* Tag pill com ponto pulsante */}
+            <div style={{
+              width: 380,
+              maxWidth: "100%",
+              height: 36,
               background: "rgba(246,227,206,0.12)",
               border: "1px solid rgba(246,227,206,0.25)",
               borderRadius: 100,
-              padding: "8px 16px",
-              fontSize: 12,
-              fontWeight: 600,
-              color: "#F6E3CE",
-              textTransform: "uppercase",
-              letterSpacing: "0.918px",
-              marginBottom: 32,
-            }}
-          >
-            <span
-              style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "0 16px",
+              flexShrink: 0,
+            }}>
+              <span style={{
                 width: 7, height: 7, borderRadius: "50%",
                 background: "#FF6B6B", flexShrink: 0,
                 animation: "pulse-dot 1.8s ease-in-out infinite",
-              }}
-            />
-            Aula ao vivo | Sábado, 02 de maio | 8h às 18h
-          </div>
+              }} />
+              <span style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#F6E3CE",
+                textTransform: "uppercase",
+                letterSpacing: "0.918px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}>
+                AULA AO VIVO | SÁBADO, 02 DE MAIO | 8H ÀS 18H
+              </span>
+            </div>
 
-          {/* Título */}
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 50.7px)",
-              fontWeight: 600,
-              color: "#F6E3CE",
+            {/* Título */}
+            <h1 className="hero-title" style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: 50.7,
               lineHeight: "77px",
-              marginBottom: 24,
-            }}
-            className="hero-headline"
-          >
-            Aprenda a interpretar qualquer ECG em um único dia de aula
-          </h1>
+              margin: 0,
+            }}>
+              <span style={{ fontWeight: 600, color: "#F6E3CE" }}>
+                Aprenda a interpretar qualquer ECG
+              </span>
+              <span style={{ fontWeight: 400, color: "#FFFFFF" }}>
+                {" "}em um único dia de aula
+              </span>
+            </h1>
 
-          {/* Subtítulo */}
-          <p
-            style={{
+            {/* Subtítulo */}
+            <p className="hero-subtitle" style={{
+              fontFamily: "var(--font-inter)",
               fontSize: 20,
               fontWeight: 400,
-              color: "#FFFFFF",
               lineHeight: "170%",
+              color: "#FFFFFF",
               maxWidth: 480,
-              marginBottom: 40,
-            }}
-            className="hero-subtitle"
-          >
-            Em um dia de aula você vai saber interpretar qualquer traçado com
-            segurança — e nunca mais depender de ninguém no plantão
-          </p>
+            }}>
+              Em um dia de aula você vai saber interpretar qualquer traçado com
+              segurança — e nunca mais depender de ninguém no plantão
+            </p>
 
-          {/* CTA row */}
-          <div
-            className="hero-cta-row"
-            style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}
-          >
-            <button
-              className="btn-cta"
-              onClick={scrollToOffer}
-              style={{
-                width: 363,
+            {/* CTA + preço */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* Botão CTA */}
+              <button
+                onClick={scrollToGarantir}
+                className="hero-cta-btn"
+                style={{
+                  width: 363,
+                  height: 70,
+                  background: "#0AA988",
+                  border: "3px solid rgba(255,255,255,0.33)",
+                  borderRadius: 59,
+                  fontFamily: "var(--font-inter)",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                  cursor: "pointer",
+                  letterSpacing: "0.04em",
+                  transition: "opacity 0.15s, transform 0.15s",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "scale(1.01)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.opacity = "1";    e.currentTarget.style.transform = "scale(1)"; }}
+              >
+                QUERO GARANTIR MINHA VAGA
+              </button>
+
+              {/* Linha de preço: justify-between em 463px */}
+              <div className="hero-price" style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: 463,
                 maxWidth: "100%",
-                height: 70,
-                fontSize: 18,
-                fontWeight: 700,
-              }}
-            >
-              QUERO GARANTIR MINHA VAGA
-            </button>
-            <span style={{ fontSize: 14, fontWeight: 400, color: "#FFFFFF" }}>
-              1º Lote por R$ 29,99
-            </span>
-          </div>
-        </div>
-      </div>
+                fontFamily: "var(--font-inter)",
+                color: "#FFFFFF",
+              }}>
+                <span style={{ fontSize: 14, fontWeight: 400 }}>1º Lote por </span>
+                <span style={{ fontSize: 16, fontWeight: 600 }}>R$ 29,99</span>
+              </div>
+            </div>
 
-      {/* ── Responsivo mobile ── */}
-      <style>{`
-        @keyframes pulse-dot {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: .5; transform: scale(.8); }
-        }
-        @media (max-width: 767px) {
-          .hero-photo {
-            position: relative !important;
-            width: 100% !important;
-            height: 240px !important;
-          }
-          .hero-photo > div { display: none !important; }
-          .hero-ecg-deco { display: none !important; }
-          .hero-content {
-            padding: 36px 0 52px !important;
-            max-width: 100% !important;
-            text-align: center;
-          }
-          .hero-headline { line-height: 1.2 !important; }
-          .hero-subtitle { max-width: 100% !important; margin-left: auto; margin-right: auto; }
-          .hero-cta-row { flex-direction: column !important; align-items: center !important; gap: 12px !important; }
-          .hero-cta-row .btn-cta { width: 100% !important; max-width: 360px !important; }
-        }
-      `}</style>
-    </section>
+          </div>{/* /hero-body */}
+        </div>{/* /hero-text-col */}
+
+        {/* ── Imagem do Raphael (desktop) ── */}
+        <div className="hero-img-wrap" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 480px)"  srcSet="/images/IMAGE-MOBILE.png" />
+            <source media="(max-width: 768px)"  srcSet="/images/TABLET-CC.png" />
+            <source media="(max-width: 1024px)" srcSet="/images/NOTEBOOK-CC.png" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/IMAGE-DOBRA1-DESKTOP.png" alt="" />
+          </picture>
+
+          {/* Vinheta inferior sobre a imagem */}
+          <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: 874,
+            background: "linear-gradient(180deg, rgba(71,6,0,0) 67.22%, #470600 125.06%)",
+            pointerEvents: "none",
+            zIndex: 1,
+          }} />
+        </div>
+
+      </section>
+    </>
   );
 }
