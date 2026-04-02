@@ -1,4 +1,4 @@
-/* Instructor — Dobra 8, fundo #470600 */
+/* Instructor — fundo vinho (#470600) + dot-pattern-dark, Neo-Brutalist */
 
 const paragraphs = [
   "O Prof. Raphael Marinho é enfermeiro especialista em Terapia Intensiva (AMIB/ABENTI) e Emergência (COBEEM), Fellow premiado da Sociedade Brasileira de Medicina de Emergência e coautor da resolução que liberou o enfermeiro a manejar ventilação mecânica no Brasil.",
@@ -9,59 +9,30 @@ const paragraphs = [
 
 export default function Instructor() {
   return (
-    <section style={{ background: "#470600", padding: "80px 0" }}>
-      <div style={{ maxWidth: 1163, margin: "0 auto", padding: "0 5%" }}>
-        <div className="inst-row" style={{
-          display: "flex",
-          gap: 130,
-          alignItems: "center",
-        }}>
+    <section className="bg-wine dot-pattern-dark border-b-2 border-black py-24">
+      <div className="max-w-5xl mx-auto px-6">
 
-          {/* ── Coluna esquerda — texto ── */}
-          <div style={{ width: 523, flexShrink: 0 }} className="inst-left">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
 
-            {/* Badge pill */}
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              width: 179,
-              height: 29,
-              background: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              borderRadius: 96,
-              justifyContent: "center",
-              marginBottom: 20,
-            }}>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 12, color: "#FFFFFF" }}>
+          {/* Left — texto */}
+          <div className="flex-1">
+            <div className="inline-flex items-center border-2 border-cream/40 rounded-full px-4 h-8 mb-6 shadow-[4px_4px_0px_0px_rgba(246,227,206,0.2)]"
+              style={{ background: "rgba(246,227,206,0.08)" }}>
+              <span className="font-body font-[700] text-xs uppercase tracking-widest text-cream/70">
                 Prof. Raphael Marinho
               </span>
             </div>
 
-            {/* Título */}
-            <h2 style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "clamp(1.4rem, 2.5vw, 35px)",
-              fontWeight: 600,
-              color: "#FFFFFF",
-              lineHeight: "146%",
-              marginBottom: 32,
-            }}>
+            <h2 className="font-display font-extrabold text-4xl lg:text-5xl tracking-tighter text-white leading-tight mb-8">
               Conheça seu{" "}
-              <span style={{ color: "#F6E3CE" }}>Professor</span>
+              <span className="text-stroke-cream">Professor</span>
             </h2>
 
-            {/* 4 parágrafos */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 23 }}>
+            <div className="flex flex-col gap-5">
               {paragraphs.map((p) => (
                 <p
                   key={p.slice(0, 20)}
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: 18,
-                    fontWeight: 400,
-                    color: "#FFFFFF",
-                    lineHeight: "32px",
-                  }}
+                  className="font-body font-[500] text-base text-white/75 leading-relaxed"
                 >
                   {p}
                 </p>
@@ -69,38 +40,21 @@ export default function Instructor() {
             </div>
           </div>
 
-          {/* ── Coluna direita — foto ── */}
+          {/* Right — foto */}
           <div
-            className="inst-photo"
-            style={{
-              width: 510,
-              height: 775,
-              flexShrink: 0,
-              background: "linear-gradient(194.99deg, #F6E3CE -75.26%, #C3AD8A 89.44%)",
-              border: "1px solid #FFFFFF",
-              borderRadius: 20,
-              overflow: "hidden",
-              position: "relative",
-            }}
+            className="inst-photo border-2 border-cream/60 rounded-[0.75rem] overflow-hidden flex-shrink-0 shadow-[8px_8px_0px_0px_#F6E3CE] relative"
+            style={{ width: 380, height: 560 }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/rapha.webp"
               alt="Prof. Raphael Marinho"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "62% top",
-                display: "block",
-              }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "62% top", display: "block" }}
             />
-            {/* Vinheta base */}
             <div aria-hidden style={{
-              position: "absolute",
-              bottom: 0, left: 0, right: 0,
-              height: "35%",
-              background: "linear-gradient(180deg, rgba(52,45,34,0) 64.89%, #342D22 115.74%)",
+              position: "absolute", bottom: 0, left: 0, right: 0,
+              height: "30%",
+              background: "linear-gradient(180deg, rgba(71,6,0,0) 0%, #470600 100%)",
               pointerEvents: "none",
             }} />
           </div>
@@ -109,15 +63,8 @@ export default function Instructor() {
       </div>
 
       <style>{`
-        @media (max-width: 1100px) {
-          .inst-row   { gap: 60px !important; }
-          .inst-left  { width: 100% !important; flex: 1; }
-          .inst-photo { width: 340px !important; height: 520px !important; }
-        }
         @media (max-width: 768px) {
-          .inst-row   { flex-direction: column !important; gap: 40px !important; }
-          .inst-left  { width: 100% !important; }
-          .inst-photo { width: 100% !important; height: 420px !important; }
+          .inst-photo { width: 100% !important; height: 380px !important; }
         }
       `}</style>
     </section>

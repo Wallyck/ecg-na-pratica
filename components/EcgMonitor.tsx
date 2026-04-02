@@ -3,12 +3,8 @@
 import Image from "next/image";
 
 /*
- * EcgMonitor — Dobra 5
- * Fundo: gradiente creme/areia
- * ECG.svg decorativo de fundo (baixa opacidade)
- * Monitor 3D com drop-shadow
- * Tela do monitor sobreposta com animação PQRST
- * Texto "NO FINAL DO DIA, VOCÊ LÊ UM ECG" em Anton 74px
+ * EcgMonitor — fundo gradiente creme/areia, Neo-Brutalist.
+ * Monitor 3D com tela animada PQRST + headline Cabinet Grotesk.
  */
 
 const PATH_D = `
@@ -34,9 +30,10 @@ export default function EcgMonitor() {
   return (
     <section
       aria-label="Monitor ECG"
+      className="border-b-2 border-black"
       style={{
         background: "linear-gradient(194.99deg, #F6E3CE -75.26%, #C3AD8A 89.44%)",
-        padding: "60px 0",
+        padding: "80px 0",
         overflow: "hidden",
       }}
     >
@@ -58,14 +55,8 @@ export default function EcgMonitor() {
           alt=""
           aria-hidden="true"
           style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.18,
-            pointerEvents: "none",
-            zIndex: 0,
+            position: "absolute", inset: 0, width: "100%", height: "100%",
+            objectFit: "cover", opacity: 0.15, pointerEvents: "none", zIndex: 0,
           }}
         />
 
@@ -78,9 +69,7 @@ export default function EcgMonitor() {
             height={390}
             unoptimized
             style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
+              width: "100%", height: "auto", display: "block",
               filter:
                 "drop-shadow(-74.56px 60.32px 38.54px rgba(0,0,0,0.03)) " +
                 "drop-shadow(-41.89px 34.35px 32.67px rgba(0,0,0,0.10)) " +
@@ -93,20 +82,13 @@ export default function EcgMonitor() {
           <div
             aria-hidden="true"
             style={{
-              position: "absolute",
-              top: "9.5%",
-              left: "11%",
-              width: "56%",
-              height: "37%",
+              position: "absolute", top: "9.5%", left: "11%", width: "56%", height: "37%",
               background: "linear-gradient(84.46deg, #470600 16.6%, #7E0001 104.11%)",
               borderRadius: 10,
               boxShadow: "inset 0 3px 18px rgba(0,0,0,0.6), inset 0 -2px 8px rgba(0,0,0,0.4)",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
+              overflow: "hidden", display: "flex", alignItems: "center",
             }}
           >
-            {/* Grade de fundo do monitor */}
             <svg
               aria-hidden="true"
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.12 }}
@@ -120,12 +102,7 @@ export default function EcgMonitor() {
               <rect width="100%" height="100%" fill="url(#mg)" />
             </svg>
 
-            {/* Traçado PQRST animado */}
-            <svg
-              viewBox="0 0 390 110"
-              preserveAspectRatio="xMidYMid meet"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            >
+            <svg viewBox="0 0 390 110" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "auto", display: "block" }}>
               <style>{`
                 @keyframes ecg-trace {
                   0%   { stroke-dashoffset: ${PATH_LENGTH}; opacity: 1; }
@@ -152,28 +129,27 @@ export default function EcgMonitor() {
           </div>
         </div>
 
-        {/* Texto Anton — centralizado sobre o monitor */}
-        <div style={{
-          position: "absolute",
-          zIndex: 2,
-          width: 368,
-          textAlign: "center",
-          pointerEvents: "none",
-          top: "50%",
-          right: "4%",
-          transform: "translateY(-50%)",
-        }} className="ecg-text-block">
-          <p style={{
-            fontFamily: "var(--font-anton), Anton, sans-serif",
-            fontSize: "clamp(2.5rem, 5vw, 74px)",
-            fontWeight: 400,
-            color: "#F6E3CE",
-            textTransform: "uppercase",
-            lineHeight: "131%",
-            textShadow: "0 2px 16px rgba(71,6,0,0.4)",
-          }}>
-            NO FINAL DO DIA, VOCÊ LÊ UM ECG
+        {/* Texto — headline Neo-Brutalist */}
+        <div
+          className="ecg-text-block"
+          style={{
+            position: "absolute", zIndex: 2, width: 368,
+            textAlign: "center", pointerEvents: "none",
+            top: "50%", right: "4%", transform: "translateY(-50%)",
+          }}
+        >
+          <p
+            className="font-display font-extrabold uppercase tracking-tighter leading-none"
+            style={{ fontSize: "clamp(2.4rem, 4.8vw, 68px)", color: "#470600" }}
+          >
+            No final do dia, você lê um ECG
           </p>
+          <div className="mt-4 border-2 border-wine rounded-[0.75rem] px-4 py-2 inline-block shadow-[4px_4px_0px_0px_#470600]"
+            style={{ background: "rgba(71,6,0,0.08)" }}>
+            <span className="font-body font-[700] text-sm uppercase tracking-widest text-wine">
+              Com segurança e autonomia
+            </span>
+          </div>
         </div>
       </div>
 

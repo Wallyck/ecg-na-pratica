@@ -1,112 +1,57 @@
 "use client";
 
-/* Pricing — Dobra 7, fundo #FFF4E8, 2 lotes */
+/* Pricing — fundo amarelo (#ffe17c) + dot-pattern, Neo-Brutalist, 2 lotes */
 export default function Pricing() {
   const scrollToGarantir = () =>
     document.getElementById("garantir")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="garantir" style={{ background: "#FFF4E8", padding: "80px 0" }}>
-      <div style={{
-        maxWidth: 810,
-        margin: "0 auto",
-        padding: "0 5%",
-        display: "flex",
-        flexDirection: "column",
-        gap: 65,
-      }}>
+    <section id="garantir" className="bg-yellow dot-pattern border-b-2 border-black py-24">
+      <div className="max-w-5xl mx-auto px-6">
 
-        {/* Título */}
-        <h2 style={{
-          fontFamily: "var(--font-inter)",
-          fontSize: "clamp(1.4rem, 2.5vw, 35px)",
-          color: "#2D2D2D",
-          textAlign: "center",
-          lineHeight: 1.4,
-        }}>
-          <span style={{ fontWeight: 600, color: "#7E0001" }}>Garanta sua vaga</span>
-          {" "}agora antes que o lote vire
-        </h2>
+        {/* Heading */}
+        <div className="text-center mb-16">
+          <p className="font-body font-[700] text-xs uppercase tracking-widest text-black/40 mb-4">
+            Inscrição
+          </p>
+          <h2 className="font-display font-extrabold text-4xl lg:text-5xl tracking-tighter text-black leading-tight">
+            <span className="text-stroke-black">Garanta sua vaga</span>
+            {" "}antes que o lote vire
+          </h2>
+        </div>
 
-        {/* Dois cards lado a lado */}
-        <div className="pricing-row" style={{
-          display: "flex",
-          gap: 26,
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}>
+        {/* Cards row */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch">
 
           {/* ── Lote 1 — ativo ── */}
-          <div style={{
-            width: 392,
-            maxWidth: "100%",
-            height: 434,
-            background: "#7E0001",
-            border: "1px solid rgba(255,255,255,0.56)",
-            borderRadius: 11,
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-          }}>
+          <div className="border-2 border-black rounded-[0.75rem] overflow-hidden shadow-hard flex flex-col w-full sm:w-[392px]"
+            style={{ background: "#7E0001" }}>
+
             {/* Header */}
-            <div style={{
-              height: 65,
-              borderBottom: "1px solid rgba(255,255,255,0.56)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 24, fontWeight: 600, color: "#FFFFFF" }}>
+            <div className="border-b-2 border-black/30 flex items-center justify-center h-16 flex-shrink-0">
+              <span className="font-display font-extrabold text-2xl tracking-tighter text-white">
                 1º LOTE
               </span>
             </div>
 
-            {/* Preço — height 168px */}
-            <div style={{
-              height: 168,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 2,
-              flexShrink: 0,
-            }}>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 34.6, fontWeight: 400, color: "#FFFFFF" }}>
-                Por apenas
-              </span>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(2.5rem, 5vw, 71.5px)", fontWeight: 600, color: "#F2DEA2", lineHeight: 1 }}>
+            {/* Preço */}
+            <div className="flex-1 flex flex-col items-center justify-center gap-1 py-10">
+              <span className="font-body font-[500] text-white/80 text-lg">Por apenas</span>
+              <span className="font-display font-extrabold text-yellow leading-none"
+                style={{ fontSize: "clamp(2.5rem,5vw,72px)" }}>
                 R$ 29,90
               </span>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 27.8, fontWeight: 400, color: "#FFFFFF" }}>
-                à vista ou no cartão
-              </span>
+              <span className="font-body font-[500] text-white/80 text-lg">à vista ou no cartão</span>
             </div>
 
-            {/* Botão */}
-            <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 24px" }}>
+            {/* CTA */}
+            <div className="px-6 pb-8 flex justify-center">
               <button
                 onClick={scrollToGarantir}
-                style={{
-                  width: 341,
-                  maxWidth: "100%",
-                  height: 74,
-                  background: "#0AA988",
-                  border: "3px solid rgba(255,255,255,0.33)",
-                  borderRadius: 300,
-                  fontFamily: "var(--font-inter)",
-                  fontSize: 18,
-                  fontWeight: 600,
-                  color: "#FFFFFF",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                  cursor: "pointer",
-                  transition: "opacity 0.15s, transform 0.15s",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "scale(1.01)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = "1";    e.currentTarget.style.transform = "scale(1)"; }}
+                className="btn-push w-full max-w-xs h-16 bg-cta border-2 border-black rounded-[0.75rem] shadow-hard font-body font-[700] uppercase tracking-wide text-white"
+                style={{ fontSize: 16 }}
               >
-                QUERO PARTICIPAR
+                QUERO PARTICIPAR →
               </button>
             </div>
           </div>
@@ -114,74 +59,32 @@ export default function Pricing() {
           {/* ── Lote 2 — bloqueado ── */}
           <div
             aria-hidden="true"
-            style={{
-              width: 392,
-              maxWidth: "100%",
-              height: 434,
-              background: "#FFF4E8",
-              border: "1px solid rgba(0,0,0,0.56)",
-              borderRadius: 11,
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden",
-              opacity: 0.7,
-              pointerEvents: "none",
-            }}
+            className="border-2 border-black rounded-[0.75rem] overflow-hidden flex flex-col w-full sm:w-[392px] opacity-50 pointer-events-none"
+            style={{ background: "#f5f0e8" }}
           >
             {/* Header */}
-            <div style={{
-              height: 65,
-              borderBottom: "1px solid rgba(45,45,45,0.56)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 24, fontWeight: 600, color: "#2D2D2D" }}>
+            <div className="border-b-2 border-black/20 flex items-center justify-center h-16 flex-shrink-0">
+              <span className="font-display font-extrabold text-2xl tracking-tighter text-black/60">
                 2º LOTE
               </span>
             </div>
 
             {/* Preço */}
-            <div style={{
-              height: 168,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 2,
-              flexShrink: 0,
-            }}>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 34.6, fontWeight: 400, color: "#2D2D2D" }}>
-                Por apenas
-              </span>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: "clamp(2.5rem, 5vw, 71.5px)", fontWeight: 600, color: "#2D2D2D", lineHeight: 1 }}>
+            <div className="flex-1 flex flex-col items-center justify-center gap-1 py-10">
+              <span className="font-body font-[500] text-black/50 text-lg">Por apenas</span>
+              <span className="font-display font-extrabold text-black/60 leading-none"
+                style={{ fontSize: "clamp(2.5rem,5vw,72px)" }}>
                 R$ 39,90
               </span>
-              <span style={{ fontFamily: "var(--font-inter)", fontSize: 27.8, fontWeight: 400, color: "#2D2D2D" }}>
-                à vista ou no cartão
-              </span>
+              <span className="font-body font-[500] text-black/50 text-lg">à vista ou no cartão</span>
             </div>
 
             {/* Botão desabilitado */}
-            <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 24px" }}>
+            <div className="px-6 pb-8 flex justify-center">
               <button
                 disabled
-                style={{
-                  width: 341,
-                  maxWidth: "100%",
-                  height: 74,
-                  background: "#2D2D2D",
-                  border: "none",
-                  borderRadius: 300,
-                  fontFamily: "var(--font-inter)",
-                  fontSize: 18,
-                  fontWeight: 600,
-                  color: "#FFFFFF",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                  cursor: "not-allowed",
-                }}
+                className="w-full max-w-xs h-16 border-2 border-black/30 rounded-[0.75rem] font-body font-[700] uppercase tracking-wide text-black/40 cursor-not-allowed"
+                style={{ fontSize: 16, background: "transparent" }}
               >
                 PRÓXIMO LOTE
               </button>

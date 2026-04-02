@@ -1,40 +1,22 @@
 import Image from "next/image";
 
-/* Footer — fundo #FFF4E8, border-top decorativa, altura 120px */
+/* Footer — fundo vinho (#470600), border-top cream, Neo-Brutalist */
 export default function Footer() {
   return (
-    <footer style={{
-      background: "#FFF4E8",
-      borderTop: "2px solid rgba(71,6,0,0.17)",
-      height: 120,
-      display: "flex",
-      alignItems: "center",
-    }}>
-      <div style={{
-        maxWidth: 1143,
-        width: "100%",
-        margin: "0 auto",
-        padding: "0 5%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}>
+    <footer className="bg-wine border-t-2 border-cream/30" style={{ minHeight: 100 }}>
+      <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+
         {/* Logo */}
         <Image
-          src="/images/LOGO-02.svg"
+          src="/images/LOGO-01.svg"
           alt="ECG na Prática"
-          width={103}
-          height={85}
-          style={{ width: 103, height: 85 }}
+          width={100}
+          height={42}
+          style={{ width: 100, height: "auto" }}
         />
 
         {/* Copyright */}
-        <p style={{
-          fontFamily: "var(--font-inter)",
-          fontSize: 13.1,
-          fontWeight: 400,
-          color: "#2D2D2D",
-        }}>
+        <p className="font-body font-[500] text-sm text-cream/50 text-center">
           © 2025 ECG na Prática. Todos os direitos reservados.
         </p>
       </div>

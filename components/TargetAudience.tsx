@@ -1,4 +1,4 @@
-/* TargetAudience — Dobra 6, fundo #FFF4E8 */
+/* TargetAudience — fundo amarelo (#ffe17c) + dot-pattern, Neo-Brutalist */
 
 const items = [
   { text: "É enfermeiro e ainda trava diante do ECG",                         primary: true },
@@ -10,75 +10,46 @@ const items = [
 
 export default function TargetAudience() {
   return (
-    <section style={{ background: "#FFF4E8", padding: "80px 0" }}>
-      <div style={{
-        maxWidth: 938,
-        margin: "0 auto",
-        padding: "10px 5%",
-        display: "flex",
-        flexDirection: "column",
-        gap: 65,
-      }}>
+    <section className="bg-yellow dot-pattern border-b-2 border-black py-24">
+      <div className="max-w-5xl mx-auto px-6">
 
-        {/* Título */}
-        <h2 style={{
-          fontFamily: "var(--font-inter)",
-          fontSize: "clamp(1.4rem, 2.5vw, 35px)",
-          fontWeight: 400,
-          color: "#2D2D2D",
-          textAlign: "center",
-          lineHeight: 1.4,
-        }}>
-          Essa aula{" "}
-          <span style={{ fontWeight: 600, color: "#7E0001" }}>é pra você</span>
-          {" "}se:
-        </h2>
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
 
-        {/* 5 cards em flex-wrap, cada um 459px, último centralizado */}
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 15,
-          justifyContent: "center",
-        }}>
-          {items.map(({ text, primary }) => (
-            <div
-              key={text}
-              className="card-h"
-              style={{
-                width: 459,
-                maxWidth: "100%",
-                background: primary ? "#9D0E0F" : "#7E0001",
-                boxShadow: primary ? "0px 4px 7.3px rgba(0,0,0,0.37)" : "none",
-                borderRadius: 6,
-                padding: "25px 30px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              {/* Ícone Check.svg 38×38 */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/Check.svg"
-                alt=""
-                width={38}
-                height={38}
-                style={{ width: 38, height: 38, flexShrink: 0 }}
-              />
-              <p style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: 18,
-                fontWeight: 400,
-                color: "#FFFFFF",
-                lineHeight: "170%",
-              }}>
-                {text}
-              </p>
-            </div>
-          ))}
+          {/* Left */}
+          <div className="lg:w-[440px] flex-shrink-0">
+            <p className="font-body font-[700] text-xs uppercase tracking-widest text-black/40 mb-4">
+              Para quem é
+            </p>
+            <h2 className="font-display font-extrabold text-4xl lg:text-5xl tracking-tighter text-black leading-tight mb-6">
+              Essa aula{" "}
+              <span className="text-stroke-black">é pra você</span>
+              {" "}se:
+            </h2>
+            <p className="font-body font-[500] text-base text-black/70 leading-relaxed">
+              Se você se encaixa em qualquer um desses perfis, você está no
+              lugar certo.
+            </p>
+          </div>
+
+          {/* Right — 5 cards empilhados */}
+          <div className="flex-1 flex flex-col gap-3">
+            {items.map(({ text, primary }) => (
+              <div
+                key={text}
+                className={`border-2 border-black rounded-[0.75rem] px-6 py-4 flex items-center gap-4 font-body font-[500] text-base text-white leading-relaxed transition-transform hover:-translate-y-0.5 ${
+                  primary
+                    ? "bg-primary shadow-hard"
+                    : "bg-crimson shadow-hard-sm"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/Check.svg" alt="" width={28} height={28} style={{ width: 28, height: 28, flexShrink: 0 }} />
+                <span>{text}</span>
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );

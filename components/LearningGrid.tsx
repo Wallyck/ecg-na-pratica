@@ -1,4 +1,4 @@
-/* LearningGrid — Dobra 4, fundo #FFF4E8 */
+/* LearningGrid — fundo amarelo (#ffe17c) + dot-pattern, Neo-Brutalist */
 
 const topics = [
   { text: "Leitura sistemática do ECG — um método que você aplica em qualquer traçado, sem se perder", primary: true },
@@ -11,82 +11,48 @@ const topics = [
 
 export default function LearningGrid() {
   return (
-    <section style={{ background: "#FFF4E8", padding: "80px 0" }}>
-      <div style={{
-        maxWidth: 848,
-        margin: "0 auto",
-        padding: "0 5%",
-        display: "flex",
-        flexDirection: "column",
-        gap: 65,
-      }}>
+    <section className="bg-yellow dot-pattern border-b-2 border-black py-24">
+      <div className="max-w-5xl mx-auto px-6">
 
-        {/* Título */}
-        <h2 style={{
-          fontFamily: "var(--font-inter)",
-          fontSize: "clamp(1.4rem, 2.5vw, 35px)",
-          fontWeight: 400,
-          color: "#2D2D2D",
-          textAlign: "center",
-          lineHeight: 1.4,
-        }}>
-          O que você vai{" "}
-          <span style={{ fontWeight: 600, color: "#7E0001" }}>dominar</span>
-          {" "}nesse dia:
-        </h2>
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
 
-        {/* Grid 3 × 2 */}
-        <div className="learn-grid" style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 278px)",
-          gap: 15,
-          justifyContent: "center",
-        }}>
-          {topics.map(({ text, primary }) => (
-            <div
-              key={text}
-              className="card-h"
-              style={{
-                background: primary ? "#9D0E0F" : "#7E0001",
-                boxShadow: primary ? "0px 4px 7.3px rgba(0,0,0,0.37)" : "none",
-                borderRadius: 6,
-                padding: 30,
-                display: "flex",
-                flexDirection: "column",
-                gap: 30,
-              }}
-            >
-              {/* Ícone Check.svg 38×38 */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/Check.svg"
-                alt=""
-                width={38}
-                height={38}
-                style={{ width: 38, height: 38, flexShrink: 0 }}
-              />
-              <p style={{
-                fontFamily: "var(--font-inter)",
-                fontSize: 18,
-                fontWeight: 400,
-                color: "#FFFFFF",
-                lineHeight: "170%",
-              }}>
-                {text}
-              </p>
-            </div>
-          ))}
+          {/* Left */}
+          <div className="lg:w-[440px] flex-shrink-0">
+            <p className="font-body font-[700] text-xs uppercase tracking-widest text-black/40 mb-4">
+              O conteúdo
+            </p>
+            <h2 className="font-display font-extrabold text-4xl lg:text-5xl tracking-tighter text-black leading-tight mb-6">
+              O que você vai{" "}
+              <span className="text-stroke-black">dominar</span>
+              {" "}nesse dia:
+            </h2>
+            <p className="font-body font-[500] text-base text-black/70 leading-relaxed">
+              6 pilares de conhecimento aplicado, do básico ao avançado, em uma
+              única imersão de 8 horas.
+            </p>
+          </div>
+
+          {/* Right — grid 2 colunas */}
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {topics.map(({ text, primary }) => (
+              <div
+                key={text}
+                className={`border-2 border-black rounded-[0.75rem] p-5 flex flex-col gap-4 transition-transform hover:-translate-y-0.5 ${
+                  primary
+                    ? "bg-primary shadow-hard col-span-1 sm:col-span-2"
+                    : "bg-crimson shadow-hard-sm"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/Check.svg" alt="" width={32} height={32} style={{ width: 32, height: 32, flexShrink: 0 }} />
+                <p className="font-body font-[500] text-base text-white leading-relaxed">
+                  {text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 960px) {
-          .learn-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 600px) {
-          .learn-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }
