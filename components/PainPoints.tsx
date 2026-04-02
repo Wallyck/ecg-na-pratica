@@ -1,115 +1,86 @@
-import { Activity, Brain, Timer, ShieldAlert } from "lucide-react";
+/* Seção 2 — Problema/Dor */
 
 const pains = [
-  {
-    icon: Activity,
-    text: "O monitor apita e você espera alguém dizer o que é",
-  },
-  {
-    icon: Brain,
-    text: "Você correlaciona o traçado com o quadro clínico... devagar demais",
-  },
-  {
-    icon: Timer,
-    text: "Em situações críticas, o tempo que você leva pra interpretar pode custar caro",
-  },
-  {
-    icon: ShieldAlert,
-    text: "Você se posiciona menos do que deveria, porque não tem certeza",
-  },
+  "O monitor apita e você espera alguém dizer o que é",
+  "Você correlaciona o traçado com o quadro clínico... devagar demais",
+  "Em situações críticas, o tempo que você leva pra interpretar pode custar caro",
+  "Você se posiciona menos do que deveria — porque não tem certeza",
 ];
 
 export default function PainPoints() {
   return (
-    <section style={{ padding: "5rem 0" }}>
-      <div className="container">
-        {/* Headline */}
+    <section
+      aria-label="Identificação do problema"
+      style={{
+        padding: "80px 5%",
+        background: "#3D0A0A",
+      }}
+    >
+      <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        {/* Headline itálica */}
         <h2
           style={{
-            fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
-            fontWeight: 800,
-            color: "#fff",
-            maxWidth: "700px",
-            marginBottom: "1.25rem",
-            lineHeight: 1.25,
+            fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+            fontWeight: 600,
+            lineHeight: 1.35,
+            color: "rgba(246,227,206,0.95)",
+            marginBottom: 28,
+            fontStyle: "italic",
           }}
         >
-          Se você é enfermeiro e ainda trava diante do ECG,{" "}
-          <span style={{ color: "#c9a0a0" }}>isso não é culpa sua.</span>
+          Se você é enfermeiro e ainda trava diante do ECG, isso não é culpa sua.
         </h2>
 
-        {/* Parágrafo explicativo */}
+        <p style={{ fontSize: 20, color: "rgba(246,227,206,0.72)", lineHeight: 1.65, marginBottom: 12 }}>
+          A graduação passou rápido por isso. Os plantões não param pra te ensinar. E ficar vendo vídeo solto no YouTube não fecha o raciocínio clínico.
+        </p>
         <p
           style={{
-            color: "#c9a0a0",
-            fontSize: "1.05rem",
-            lineHeight: 1.75,
-            maxWidth: "640px",
-            marginBottom: "3rem",
+            fontSize: 20,
+            fontWeight: 600,
+            color: "rgba(246,227,206,0.9)",
+            marginTop: 8,
+            marginBottom: 20,
           }}
         >
-          A graduação passou rápido por isso. Os plantões não param pra te
-          ensinar. E ficar vendo vídeo solto no YouTube não fecha o raciocínio
-          clínico.
+          O resultado é sempre o mesmo:
         </p>
 
-        {/* Grid de cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "1.25rem",
-            marginBottom: "3rem",
-          }}
-        >
-          {pains.map(({ icon: Icon, text }) => (
+        {/* Cards com borda esquerda */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 36 }}>
+          {pains.map((text) => (
             <div
               key={text}
               style={{
-                backgroundColor: "var(--color-card)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: "0.75rem",
-                padding: "1.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.875rem",
+                padding: "18px 20px 18px 24px",
+                background: "rgba(45,5,5,0.6)",
+                borderLeft: "4px solid #7E1010",
+                borderRadius: "0 12px 12px 0",
+                fontSize: 18,
+                lineHeight: 1.5,
+                color: "rgba(246,227,206,0.85)",
               }}
             >
-              <div
-                style={{
-                  width: "2.5rem",
-                  height: "2.5rem",
-                  backgroundColor: "rgba(0,200,83,0.1)",
-                  borderRadius: "0.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                <Icon size={20} color="#00C853" />
-              </div>
-              <p style={{ color: "#e0d0d0", lineHeight: 1.55, fontSize: "0.95rem" }}>
-                {text}
-              </p>
+              {text}
             </div>
           ))}
         </div>
 
-        {/* Frase de impacto */}
-        <p
+        {/* Frase de fechamento */}
+        <div
           style={{
-            textAlign: "center",
-            fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
-            fontWeight: 700,
-            color: "#fff",
-            borderTop: "1px solid rgba(255,255,255,0.08)",
-            paddingTop: "2rem",
+            fontSize: 20,
+            fontWeight: 400,
+            color: "rgba(246,227,206,0.9)",
+            padding: "24px 28px",
+            background: "rgba(0,0,0,0.25)",
+            borderRadius: 12,
+            borderLeft: "4px solid #7E1010",
           }}
         >
           Isso não é falta de esforço.{" "}
-          <span style={{ color: "#00C853" }}>É falta de método.</span>
-        </p>
+          <strong style={{ fontWeight: 700 }}>É falta de método.</strong>
+        </div>
       </div>
     </section>
   );

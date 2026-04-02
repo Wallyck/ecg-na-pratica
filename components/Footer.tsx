@@ -4,40 +4,22 @@ export default function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: "#1a0303",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        padding: "2.5rem 0",
+        padding: "32px 5%",
+        background: "#2D0505",
+        borderTop: "1px solid rgba(246,227,206,0.06)",
+        textAlign: "center",
       }}
     >
-      <div
-        className="container"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
-          textAlign: "center",
-        }}
-      >
-        {/* Logo */}
-        <Image
-          src="/images/LOGO-02.svg"
-          alt="ECG na Prática"
-          width={120}
-          height={40}
-          style={{ height: "36px", width: "auto", opacity: 0.8 }}
-        />
-
-        {/* Copyright */}
-        <p
-          style={{
-            color: "#7a5555",
-            fontSize: "0.8rem",
-          }}
-        >
-          © 2025 ECG na Prática. Todos os direitos reservados.
-        </p>
-      </div>
+      <Image
+        src="/images/LOGO-02.svg"
+        alt="ECG na Prática"
+        width={120}
+        height={40}
+        style={{ height: 36, width: "auto", margin: "0 auto 12px", opacity: 0.65 }}
+      />
+      <p style={{ fontSize: 14, color: "rgba(246,227,206,0.45)" }}>
+        © 2025 ECG na Prática. Todos os direitos reservados.
+      </p>
     </footer>
   );
 }

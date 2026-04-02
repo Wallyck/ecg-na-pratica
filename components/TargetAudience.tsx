@@ -1,64 +1,85 @@
-import { CheckCircle2 } from "lucide-react";
+/* Seção 6 — Para quem é */
 
 const targets = [
-  "É enfermeiro e ainda trava diante do ECG",
-  "Quer ter segurança para interpretar traçados no plantão",
-  "Trabalha ou quer trabalhar em UTI, emergência ou cardiologia",
-  "Quer tomar decisões com autonomia, sem depender de médico ou colega",
-  "É acadêmico de enfermagem e quer sair na frente",
+  "✅ É enfermeiro e ainda trava diante do ECG",
+  "✅ Quer ter segurança para interpretar traçados no plantão",
+  "✅ Trabalha ou quer trabalhar em UTI, emergência ou cardiologia",
+  "✅ Quer tomar decisões com autonomia, sem depender de médico ou colega",
+  "✅ É acadêmico de enfermagem e quer sair na frente",
 ];
 
 export default function TargetAudience() {
   return (
-    <section style={{ padding: "5rem 0" }}>
-      <div className="container">
-        {/* Título */}
+    <section
+      aria-label="Público do curso"
+      style={{
+        padding: "80px 5%",
+        background: "#2D0505",
+      }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h2
           style={{
-            fontSize: "clamp(1.4rem, 3vw, 2rem)",
-            fontWeight: 800,
-            color: "#fff",
-            marginBottom: "2.5rem",
-            textAlign: "center",
+            fontSize: "clamp(1.4rem, 3vw, 2.25rem)",
+            fontWeight: 400,
+            color: "rgba(246,227,206,0.95)",
+            marginBottom: 36,
+            lineHeight: 1.3,
           }}
         >
-          Essa aula é pra você se:
+          Essa aula é{" "}
+          <strong style={{ fontWeight: 600 }}>pra você</strong> se:
         </h2>
 
-        {/* Grid de 5 cards */}
-        <div
+        {/* Lista simples */}
+        <ul
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.25rem",
-            maxWidth: "860px",
-            margin: "0 auto",
+            listStyle: "none",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            maxWidth: 720,
+            marginBottom: 32,
           }}
         >
           {targets.map((item) => (
-            <div
+            <li
               key={item}
               style={{
-                backgroundColor: "var(--color-card)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: "0.75rem",
-                padding: "1.25rem 1.5rem",
-                display: "flex",
-                gap: "0.75rem",
-                alignItems: "flex-start",
+                padding: "16px 20px",
+                background: "rgba(61,10,10,0.8)",
+                borderRadius: 12,
+                fontSize: 18,
+                fontWeight: 600,
+                color: "rgba(246,227,206,0.88)",
+                border: "1px solid rgba(246,227,206,0.07)",
               }}
             >
-              <CheckCircle2
-                size={20}
-                color="#00C853"
-                style={{ flexShrink: 0, marginTop: "2px" }}
-              />
-              <p style={{ color: "#e0d0d0", lineHeight: 1.55, fontSize: "0.95rem" }}>
-                {item}
-              </p>
-            </div>
+              {item}
+            </li>
           ))}
-        </div>
+        </ul>
+
+        {/* Divisor + nota negativa */}
+        <div
+          style={{
+            width: 48,
+            height: 3,
+            background: "rgba(246,227,206,0.15)",
+            borderRadius: 100,
+            marginBottom: 20,
+          }}
+        />
+        <p
+          style={{
+            fontSize: 16,
+            color: "rgba(246,227,206,0.4)",
+            fontStyle: "italic",
+            maxWidth: 600,
+          }}
+        >
+          Não é pra você se só quer mais um certificado pra colocar no currículo sem aplicar na prática.
+        </p>
       </div>
     </section>
   );

@@ -1,87 +1,93 @@
-import { CalendarDays, Award, Clock } from "lucide-react";
+/* Seção 3 — Solução / Evento */
 
-const badges = [
-  { icon: CalendarDays, label: "Sábado, 02 de maio" },
-  { icon: Award, label: "Com certificado" },
-  { icon: Clock, label: "Das 8h às 18h" },
+const cards = [
+  { icon: "📅", label: "Sábado, 02 de maio" },
+  { icon: "⏰", label: "Das 8h às 18h" },
+  { icon: "💻", label: "Online e ao vivo" },
+  { icon: "📄", label: "Com certificado" },
 ];
 
 export default function CourseDetails() {
   return (
     <section
+      aria-label="Sobre o evento"
       style={{
-        backgroundColor: "var(--color-card)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        padding: "4.5rem 0",
+        padding: "80px 5%",
+        background: "#2D0505",
       }}
     >
-      <div
-        className="container"
-        style={{ textAlign: "center" }}
-      >
-        {/* Texto principal */}
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h2
           style={{
-            fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
-            fontWeight: 800,
-            color: "#fff",
-            marginBottom: "1rem",
-            maxWidth: "700px",
-            margin: "0 auto 1rem",
-            lineHeight: 1.2,
+            fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
+            fontWeight: 600,
+            lineHeight: 1.25,
+            color: "rgba(246,227,206,0.95)",
+            marginBottom: 20,
+            maxWidth: 720,
           }}
         >
-          ECG na Prática é uma{" "}
-          <span style={{ color: "#00C853" }}>Imersão ao vivo</span>, do zero ao
-          avançado, em um único dia.
+          ECG na Prática é uma aula ao vivo,{" "}
+          <em style={{ fontStyle: "italic" }}>do zero ao avançado,</em> em um único dia.
         </h2>
 
-        {/* Subtexto */}
         <p
           style={{
-            color: "#c9a0a0",
-            fontSize: "1.05rem",
-            lineHeight: 1.75,
-            maxWidth: "560px",
-            margin: "0 auto 2.5rem",
+            fontSize: 20,
+            color: "rgba(246,227,206,0.7)",
+            marginBottom: 48,
+            maxWidth: 620,
+            lineHeight: 1.65,
           }}
         >
-          8 horas de imersão completa, com raciocínio clínico aplicado à
-          realidade do enfermeiro no plantão.
+          8 horas de imersão completa, com raciocínio clínico aplicado à realidade do
+          enfermeiro no plantão.
         </p>
 
-        {/* Badges/Pills */}
+        {/* Grid 2×2 de cards */}
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "1rem",
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 16,
+            maxWidth: 860,
           }}
+          className="event-grid"
         >
-          {badges.map(({ icon: Icon, label }) => (
+          {cards.map(({ icon, label }) => (
             <div
               key={label}
               style={{
+                padding: "24px 20px",
+                background: "rgba(246,227,206,0.06)",
+                border: "1px solid rgba(246,227,206,0.12)",
+                borderRadius: 16,
                 display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                backgroundColor: "rgba(0,200,83,0.08)",
-                border: "1px solid rgba(0,200,83,0.25)",
-                borderRadius: "999px",
-                padding: "0.6rem 1.25rem",
-                color: "#00C853",
-                fontWeight: 600,
-                fontSize: "0.9rem",
+                flexDirection: "column",
+                gap: 10,
               }}
             >
-              <Icon size={16} />
-              {label}
+              <span style={{ fontSize: 26 }}>{icon}</span>
+              <span
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: "rgba(246,227,206,0.9)",
+                  lineHeight: 1.4,
+                }}
+              >
+                {label}
+              </span>
             </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .event-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

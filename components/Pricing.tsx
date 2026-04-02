@@ -1,190 +1,209 @@
 "use client";
 
+/* Seção 7 — Oferta / 3 lotes */
+
+const lotes = [
+  {
+    badge: "🔥 Disponível agora",
+    badgeActive: true,
+    lote: "1º LOTE",
+    desc: "Menor valor disponível",
+    price: "29,99",
+    btnLabel: "QUERO GARANTIR PELO MENOR PREÇO",
+    active: true,
+  },
+  {
+    badge: "⚠️ 2º LOTE",
+    badgeActive: false,
+    lote: "2º LOTE",
+    desc: "Quando o 1º lote fechar, o valor sobe",
+    price: "39,90",
+    btnLabel: "GARANTIR ANTES DO PREÇO SUBIR",
+    active: false,
+  },
+  {
+    badge: "🚨 3º LOTE",
+    badgeActive: false,
+    lote: "3º LOTE — Última chamada",
+    desc: "Última chamada",
+    price: "49,99",
+    btnLabel: "QUERO PARTICIPAR MESMO ASSIM",
+    active: false,
+  },
+];
+
 export default function Pricing() {
   return (
     <section
+      id="garantir"
+      aria-label="Opções de compra"
       style={{
-        backgroundColor: "var(--color-card)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        padding: "5rem 0",
+        padding: "80px 5%",
+        background: "#3D0A0A",
       }}
     >
-      <div className="container">
-        {/* Título */}
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h2
           style={{
-            fontSize: "clamp(1.4rem, 3vw, 2rem)",
-            fontWeight: 800,
-            color: "#fff",
-            textAlign: "center",
-            marginBottom: "3rem",
+            fontSize: "clamp(1.4rem, 3vw, 2.25rem)",
+            fontWeight: 400,
+            color: "rgba(246,227,206,0.95)",
+            marginBottom: 48,
+            lineHeight: 1.3,
+            maxWidth: 680,
           }}
         >
-          Garanta sua vaga agora antes que o lote vire
+          Garanta sua vaga agora. O preço sobe{" "}
+          <strong style={{ fontWeight: 600 }}>conforme os lotes fecham.</strong>
         </h2>
 
-        {/* Dois cards lado a lado */}
+        {/* Grid 3 colunas */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.5rem",
-            maxWidth: "680px",
-            margin: "0 auto",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 20,
+            maxWidth: 960,
           }}
+          className="offer-grid"
         >
-          {/* Lote 1 — em destaque */}
-          <div
-            style={{
-              backgroundColor: "#2D0505",
-              border: "2px solid #00C853",
-              borderRadius: "1rem",
-              padding: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "0.75rem",
-              textAlign: "center",
-              position: "relative",
-              boxShadow: "0 0 24px rgba(0,200,83,0.15)",
-            }}
-          >
-            {/* Badge de lote ativo */}
-            <span
-              style={{
-                position: "absolute",
-                top: "-14px",
-                backgroundColor: "#00C853",
-                color: "#000",
-                fontWeight: 800,
-                fontSize: "0.75rem",
-                letterSpacing: "0.08em",
-                padding: "0.25rem 1rem",
-                borderRadius: "999px",
-              }}
-            >
-              DISPONÍVEL AGORA
-            </span>
-
-            <p
-              style={{
-                color: "#00C853",
-                fontWeight: 800,
-                fontSize: "1rem",
-                letterSpacing: "0.06em",
-              }}
-            >
-              1º LOTE
-            </p>
-
-            <p
-              style={{
-                color: "#fff",
-                fontWeight: 800,
-                fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
-                lineHeight: 1,
-              }}
-            >
-              R$ 29,99
-            </p>
-
-            <p style={{ color: "#c9a0a0", fontSize: "0.85rem" }}>
-              à vista ou no cartão
-            </p>
-
-            <button
-              className="btn-cta"
-              onClick={() => {}}
-              style={{ width: "100%", marginTop: "0.5rem" }}
-            >
-              QUERO PARTICIPAR
-            </button>
-          </div>
-
-          {/* Lote 2 — bloqueado */}
-          <div
-            style={{
-              backgroundColor: "#2D0505",
-              border: "2px solid rgba(255,255,255,0.1)",
-              borderRadius: "1rem",
-              padding: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "0.75rem",
-              textAlign: "center",
-              opacity: 0.5,
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Overlay de bloqueado */}
+          {lotes.map(({ badge, badgeActive, lote, desc, price, btnLabel, active }) => (
             <div
-              aria-hidden
+              key={lote}
               style={{
-                position: "absolute",
-                inset: 0,
-                backdropFilter: "grayscale(1)",
-              }}
-            />
-
-            <p
-              style={{
-                color: "#aaa",
-                fontWeight: 800,
-                fontSize: "1rem",
-                letterSpacing: "0.06em",
-                position: "relative",
+                padding: "32px 28px",
+                borderRadius: 16,
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                border: `2px solid ${active ? "#00C853" : "rgba(246,227,206,0.1)"}`,
+                background: active
+                  ? "rgba(246,227,206,0.05)"
+                  : "rgba(246,227,206,0.02)",
+                boxShadow: active ? "0 0 36px rgba(0,200,83,0.14)" : "none",
+                opacity: active ? 1 : 0.6,
               }}
             >
-              2º LOTE
-            </p>
+              {/* Badge */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "4px 12px",
+                  borderRadius: 100,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  width: "fit-content",
+                  background: badgeActive
+                    ? "rgba(0,200,83,0.12)"
+                    : "rgba(246,227,206,0.06)",
+                  color: badgeActive ? "#00C853" : "rgba(246,227,206,0.4)",
+                  border: `1px solid ${badgeActive ? "rgba(0,200,83,0.28)" : "rgba(246,227,206,0.12)"}`,
+                }}
+              >
+                {badge}
+              </div>
 
-            <p
-              style={{
-                color: "#bbb",
-                fontWeight: 800,
-                fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
-                lineHeight: 1,
-                position: "relative",
-              }}
-            >
-              R$ 39,90
-            </p>
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: active ? "#00C853" : "rgba(246,227,206,0.55)",
+                }}
+              >
+                {lote}
+              </p>
 
-            <p
-              style={{
-                color: "#888",
-                fontSize: "0.85rem",
-                position: "relative",
-              }}
-            >
-              à vista ou no cartão
-            </p>
+              <p style={{ fontSize: 14, color: "rgba(246,227,206,0.55)", lineHeight: 1.45 }}>
+                {desc}
+              </p>
 
-            {/* Botão desabilitado */}
-            <button
-              disabled
-              style={{
-                width: "100%",
-                marginTop: "0.5rem",
-                backgroundColor: "#555",
-                color: "#999",
-                fontWeight: 800,
-                fontSize: "1rem",
-                padding: "0.875rem 2rem",
-                borderRadius: "0.5rem",
-                border: "none",
-                cursor: "not-allowed",
-                position: "relative",
-              }}
-            >
-              PRÓXIMO LOTE
-            </button>
-          </div>
+              {/* Preço */}
+              <div>
+                <span style={{ fontSize: 14, color: "rgba(246,227,206,0.4)" }}>R$ </span>
+                <strong
+                  style={{
+                    display: "block",
+                    fontSize: 44,
+                    fontWeight: 600,
+                    lineHeight: 1.1,
+                    color: "rgba(246,227,206,0.95)",
+                  }}
+                >
+                  {price}
+                </strong>
+              </div>
+
+              {/* Botão */}
+              {active ? (
+                <button
+                  onClick={() => {}}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 56,
+                    padding: "0 20px",
+                    borderRadius: 59,
+                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: "0.04em",
+                    textAlign: "center",
+                    border: "2px solid rgba(255,255,255,0.22)",
+                    cursor: "pointer",
+                    background: "#00C853",
+                    color: "#fff",
+                    lineHeight: 1.3,
+                    transition: "transform 0.15s, opacity 0.15s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.02)";
+                    e.currentTarget.style.opacity = "0.92";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                    e.currentTarget.style.opacity = "1";
+                  }}
+                >
+                  {btnLabel}
+                </button>
+              ) : (
+                <button
+                  disabled
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 56,
+                    padding: "0 20px",
+                    borderRadius: 59,
+                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: "0.04em",
+                    textAlign: "center",
+                    border: "2px solid rgba(246,227,206,0.1)",
+                    cursor: "not-allowed",
+                    background: "rgba(246,227,206,0.04)",
+                    color: "rgba(246,227,206,0.25)",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {btnLabel}
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .offer-grid { grid-template-columns: 1fr !important; max-width: 480px !important; }
+        }
+      `}</style>
     </section>
   );
 }
